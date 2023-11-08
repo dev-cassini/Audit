@@ -1,6 +1,6 @@
-using Audit.Domain.Enums;
+using Audit.Domain.Abstraction.Enums;
 
-namespace Audit.Domain.Model.Vehicles;
+namespace Audit.Domain.Abstraction.Model;
 
 public abstract class Vehicle
 {

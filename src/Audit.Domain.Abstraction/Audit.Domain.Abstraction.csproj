@@ -8,8 +8,4 @@
 
 
 
-    <ItemGroup>
-      <ProjectReference Include="..\Audit.Domain.Abstraction\Audit.Domain.Abstraction.csproj" />
-    </ItemGroup>
-
 </Project>

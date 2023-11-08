@@ -1,4 +1,4 @@
-namespace Audit.Domain.Enums;
+namespace Audit.Domain.Abstraction.Enums;
 
 public enum TransactionStatus
 {
