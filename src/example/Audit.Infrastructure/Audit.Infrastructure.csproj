@@ -5,11 +5,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
-
-
+    
     <ItemGroup>
-      <ProjectReference Include="..\Audit.Domain.Abstraction\Audit.Domain.Abstraction.csproj" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     </ItemGroup>
-
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Audit.Domain\Audit.Domain.csproj" />
+    </ItemGroup>
+    
 </Project>

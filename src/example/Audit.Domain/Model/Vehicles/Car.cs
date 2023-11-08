@@ -1,5 +1,4 @@
 using Audit.Domain.Abstraction.Enums;
-using Audit.Domain.Abstraction.Model;
 
 namespace Audit.Domain.Model.Vehicles;
 

@@ -4,7 +4,7 @@ namespace Audit.Domain.Abstraction.Model;
 
 public abstract class Vehicle
 {
-    public Guid Id { get; }
+    public virtual Guid Id { get; }
     public VehicleType Type { get; }
     public FuelType FuelType { get; set; }
     public int FuelLevel { get; set; }
