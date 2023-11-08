@@ -4,8 +4,8 @@ namespace Audit.Domain.Model.Vehicles;
 
 public abstract class Vehicle : Abstraction.Model.Vehicle, IAuditable
 {
-    private readonly List<VehicleAudit> _auditRecords = new();
-    public IEnumerable<VehicleAudit> AuditRecords => _auditRecords.AsReadOnly();
+    private readonly List<VehicleAuditRecord> _auditRecords = new();
+    public IEnumerable<VehicleAuditRecord> AuditRecords => _auditRecords.AsReadOnly();
     
     protected Vehicle(
         Guid id, 
@@ -17,7 +17,7 @@ public abstract class Vehicle : Abstraction.Model.Vehicle, IAuditable
 
     public void AddAuditRecord()
     {
-        var auditRecord = new VehicleAudit(this);
+        var auditRecord = new VehicleAuditRecord(this);
         _auditRecords.Add(auditRecord);
     }
 }
