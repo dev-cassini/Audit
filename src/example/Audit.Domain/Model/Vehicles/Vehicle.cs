@@ -12,10 +12,8 @@ public abstract class Vehicle : Abstraction.Model.Vehicle, IAuditable
         VehicleType type, 
         FuelType fuelType, 
         int fuelLevel, 
-        int tankCapacity) 
-        : base(id, type, fuelType, fuelLevel, tankCapacity)
-    {
-    }
+        int tankCapacity)
+    : base(id, type, fuelType, fuelLevel, tankCapacity) { }
 
     public void AddAuditRecord()
     {

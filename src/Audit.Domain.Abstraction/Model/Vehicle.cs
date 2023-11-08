@@ -6,10 +6,10 @@ public abstract class Vehicle
 {
     public virtual Guid Id { get; }
     public VehicleType Type { get; }
-    public FuelType FuelType { get; set; }
-    public int FuelLevel { get; set; }
+    public FuelType FuelType { get; }
+    public int FuelLevel { get; }
     public int TankCapacity { get; }
-
+    
     protected Vehicle(
         Guid id, 
         VehicleType type, 
@@ -23,4 +23,9 @@ public abstract class Vehicle
         FuelLevel = fuelLevel;
         TankCapacity = tankCapacity;
     }
+    
+    #region EF Constructor
+    // ReSharper disable once UnusedMember.Local
+    protected Vehicle() { }
+    #endregion
 }

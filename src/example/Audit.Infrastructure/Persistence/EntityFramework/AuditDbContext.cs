@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework;
 
-using Vehicle = Domain.Abstraction.Model.Vehicle;
-
 public class AuditDbContext : DbContext
 {
     public DbSet<Vehicle> Vehicles { get; set; } = null!;

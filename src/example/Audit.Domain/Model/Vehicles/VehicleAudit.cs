@@ -1,10 +1,10 @@
 namespace Audit.Domain.Model.Vehicles;
 
-public class VehicleAudit : Vehicle
+public class VehicleAudit : Abstraction.Model.Vehicle
 {
     public sealed override Guid Id { get; } = Guid.NewGuid();
     public Guid VehicleId { get; }
-    public Vehicle Vehicle { get; }
+    public Vehicle Vehicle { get; } = null!;
 
     public VehicleAudit(Vehicle vehicle) 
         : base(
@@ -17,4 +17,9 @@ public class VehicleAudit : Vehicle
         VehicleId = vehicle.Id;
         Vehicle = vehicle;
     }
+    
+    #region EF Constructor
+    // ReSharper disable once UnusedMember.Local
+    protected VehicleAudit() { }
+    #endregion
 }
