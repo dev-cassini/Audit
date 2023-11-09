@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Audit.Domain.Abstraction\Audit.Domain.Abstraction.csproj" />
+        <ProjectReference Include="..\..\..\src\Audit.Domain.Abstraction\Audit.Domain.Abstraction.csproj" />
     </ItemGroup>
 
 </Project>
