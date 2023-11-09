@@ -25,6 +25,6 @@ public class VehicleAuditRecordConfiguration : IEntityTypeConfiguration<VehicleA
         builder
             .HasMany(x => x.Metadata)
             .WithOne()
-            .HasForeignKey(x => x.VehicleAuditRecordId);
+            .HasForeignKey(x => x.AuditRecordId);
     }
 }

@@ -1,20 +1,22 @@
+using Audit.Domain.Model.Audit;
+
 namespace Audit.Domain.Model.Vehicles;
 
-public class VehicleAuditRecordMetadata
+public class AuditRecordMetadata<T> where T : IAuditRecord
 {
     public Guid Id { get; } = Guid.NewGuid();
-    public Guid VehicleAuditRecordId { get; }
+    public Guid AuditRecordId { get; }
     public string PropertyName { get; } = null!;
     public string? OriginalValue { get; }
     public string? UpdatedValue { get; }
     
-    public VehicleAuditRecordMetadata(
-        VehicleAuditRecord vehicleAuditRecord, 
+    public AuditRecordMetadata(
+        T auditRecord, 
         string propertyName, 
         string? originalValue, 
         string? updatedValue)
     {
-        VehicleAuditRecordId = vehicleAuditRecord.Id;
+        AuditRecordId = auditRecord.Id;
         PropertyName = propertyName;
         OriginalValue = originalValue;
         UpdatedValue = updatedValue;
@@ -22,6 +24,6 @@ public class VehicleAuditRecordMetadata
     
     #region EF Constructor
     // ReSharper disable once UnusedMember.Local
-    private VehicleAuditRecordMetadata() { }
+    private AuditRecordMetadata() { }
     #endregion
 }

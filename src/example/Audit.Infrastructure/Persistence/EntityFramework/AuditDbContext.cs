@@ -9,7 +9,7 @@ public class AuditDbContext : DbContext
 {
     public DbSet<Vehicle> Vehicles { get; set; } = null!;
     public DbSet<VehicleAuditRecord> VehicleAuditRecords { get; set; } = null!;
-    public DbSet<VehicleAuditRecordMetadata> VehicleAuditRecordMetadata { get; set; } = null!;
+    public DbSet<AuditRecordMetadata<VehicleAuditRecord>> VehicleAuditRecordMetadata { get; set; } = null!;
     
     public AuditDbContext(DbContextOptions<AuditDbContext> options) : base(options) { }
     
