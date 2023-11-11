@@ -10,7 +10,7 @@ public static class AuditableExtensions
         var originalEntity = auditable.AuditRecords.MaxBy(x => x.Timestamp);
         if (originalEntity is null)
         {
-            return new List<AuditRecordMetadata<T>>();
+            return new List<AuditRecordMetadata<T>> { auditRecord.CreateInitialisationMetadata() };
         }
         
         var auditRecordMetadata = new List<AuditRecordMetadata<T>>();
