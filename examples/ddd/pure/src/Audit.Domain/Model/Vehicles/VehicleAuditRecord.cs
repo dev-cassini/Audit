@@ -12,7 +12,6 @@ public class VehicleAuditRecord : Abstraction.Model.Vehicle, IAuditRecord
 
     public VehicleAuditRecord(Vehicle vehicle) 
         : base(
-            vehicle.Id, 
             vehicle.Type,
             vehicle.FuelType, 
             vehicle.FuelLevel, 

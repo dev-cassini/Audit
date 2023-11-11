@@ -4,20 +4,18 @@ namespace Audit.Domain.Abstraction.Model;
 
 public abstract class Vehicle
 {
-    public virtual Guid Id { get; }
+    public virtual Guid Id { get; } = Guid.NewGuid();
     public VehicleType Type { get; }
     public FuelType FuelType { get; }
     public int FuelLevel { get; }
     public int TankCapacity { get; }
     
     protected Vehicle(
-        Guid id, 
         VehicleType type, 
         FuelType fuelType, 
         int fuelLevel, 
         int tankCapacity)
     {
-        Id = id;
         Type = type;
         FuelType = fuelType;
         FuelLevel = fuelLevel;

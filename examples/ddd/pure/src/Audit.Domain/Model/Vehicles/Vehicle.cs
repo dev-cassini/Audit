@@ -9,12 +9,11 @@ public abstract class Vehicle : Abstraction.Model.Vehicle, IAuditable<VehicleAud
     public IEnumerable<VehicleAuditRecord> AuditRecords => _auditRecords.Where(x => x.Metadata.Any());
 
     protected Vehicle(
-        Guid id,
         VehicleType type,
         FuelType fuelType,
         int fuelLevel,
         int tankCapacity)
-        : base(id, type, fuelType, fuelLevel, tankCapacity)
+        : base(type, fuelType, fuelLevel, tankCapacity)
     {
         AddAuditRecord();
     }
