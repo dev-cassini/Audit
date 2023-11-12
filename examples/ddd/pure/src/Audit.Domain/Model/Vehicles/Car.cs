@@ -5,10 +5,11 @@ namespace Audit.Domain.Model.Vehicles;
 public class Car : Vehicle
 {
     public Car(
+        Guid id,
         FuelType fuelType, 
         int fuelLevel, 
         int tankCapacity) 
-        : base(VehicleType.Car, fuelType, fuelLevel, tankCapacity)
+        : base(id, VehicleType.Car, fuelType, fuelLevel, tankCapacity)
     {
     }
 }

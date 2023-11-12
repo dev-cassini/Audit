@@ -4,7 +4,7 @@ namespace Audit.Domain.Model;
 
 public class Pump : Abstraction.Model.Pump
 {
-    public Vehicle? Vehicle { get; protected set; }
+    public Vehicle? Vehicle { get; private set; }
     
     public Pump(Guid id, Lane lane) : base(id, lane) { }
     
