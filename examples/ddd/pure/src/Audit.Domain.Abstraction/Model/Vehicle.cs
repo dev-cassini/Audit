@@ -7,7 +7,7 @@ public abstract class Vehicle
     public virtual Guid Id { get; } = Guid.NewGuid();
     public VehicleType Type { get; }
     public FuelType FuelType { get; }
-    public int FuelLevel { get; }
+    public int FuelLevel { get; set; }
     public int TankCapacity { get; }
     
     protected Vehicle(
