@@ -12,6 +12,7 @@ public class VehicleAuditRecordConfiguration : IEntityTypeConfiguration<VehicleA
         
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Timestamp);
+        builder.Property(x => x.VehicleId);
         builder.Property(x => x.Type);
         builder.Property(x => x.FuelType);
         builder.Property(x => x.FuelLevel);

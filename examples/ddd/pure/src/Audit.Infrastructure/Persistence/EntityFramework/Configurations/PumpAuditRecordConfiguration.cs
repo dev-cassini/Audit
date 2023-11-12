@@ -1,0 +1,28 @@
+using Audit.Domain.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Audit.Infrastructure.Persistence.EntityFramework.Configurations;
+
+public class PumpAuditRecordConfiguration : IEntityTypeConfiguration<PumpAuditRecord>
+{
+    public void Configure(EntityTypeBuilder<PumpAuditRecord> builder)
+    {
+        builder.ToTable(nameof(AuditDbContext.PumpAuditRecords));
+        
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Timestamp);
+        builder.Property(x => x.VehicleId);
+        builder.Property(x => x.LaneId);
+        
+        builder
+            .HasOne(x => x.Pump)
+            .WithMany(x => x.AuditRecords)
+            .HasForeignKey(x => x.PumpId);
+        
+        builder
+            .HasMany(x => x.Metadata)
+            .WithOne()
+            .HasForeignKey(x => x.AuditRecordId);
+    }
+}

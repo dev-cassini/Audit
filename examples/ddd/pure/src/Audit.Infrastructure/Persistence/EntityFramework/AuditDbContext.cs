@@ -1,5 +1,6 @@
 using System.Reflection;
 using Audit.Domain.Abstraction.Model.Audit;
+using Audit.Domain.Model;
 using Audit.Domain.Model.Vehicles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -8,6 +9,9 @@ namespace Audit.Infrastructure.Persistence.EntityFramework;
 
 public class AuditDbContext : DbContext
 {
+    public DbSet<Pump> Pumps { get; set; } = null!;
+    public DbSet<PumpAuditRecord> PumpAuditRecords { get; set; } = null!;
+    public DbSet<AuditRecordMetadata<PumpAuditRecord>> PumpAuditRecordMetadata { get; set; } = null!;
     public DbSet<Vehicle> Vehicles { get; set; } = null!;
     public DbSet<VehicleAuditRecord> VehicleAuditRecords { get; set; } = null!;
     public DbSet<AuditRecordMetadata<VehicleAuditRecord>> VehicleAuditRecordMetadata { get; set; } = null!;
