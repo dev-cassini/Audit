@@ -8,7 +8,7 @@ public abstract class Pump
     public const decimal FuelDispenseRate = 1.5m;
     
     public Guid Id { get; }
-    public Guid? VehicleId { get; private set; }
+    public Guid? VehicleId { get; protected set; }
     
     public Guid LaneId { get; }
     public Lane Lane { get; } = null!;

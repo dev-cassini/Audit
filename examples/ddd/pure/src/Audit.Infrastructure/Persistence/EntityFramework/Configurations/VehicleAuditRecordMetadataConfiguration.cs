@@ -1,3 +1,4 @@
+using Audit.Domain.Abstraction.Model.Audit;
 using Audit.Domain.Model.Vehicles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

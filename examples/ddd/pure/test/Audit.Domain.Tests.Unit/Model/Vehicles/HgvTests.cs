@@ -1,7 +1,6 @@
-namespace Audit.Domain.Tests.Unit.Model.Vehicles;
+using Audit.Domain.Model.Vehicles;
 
-using Hgv = Domain.Model.Vehicles.Hgv;
-using Vehicle = Domain.Model.Vehicles.Vehicle;
+namespace Audit.Domain.Tests.Unit.Model.Vehicles;
 
 [TestFixture]
 public class HgvTests

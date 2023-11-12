@@ -1,8 +1,7 @@
 using Audit.Domain.Abstraction.Enums;
+using Audit.Domain.Model.Vehicles;
 
 namespace Audit.Domain.Tests.Unit.Model.Vehicles;
-
-using Vehicle = Domain.Model.Vehicles.Vehicle;
 
 [TestFixture]
 public class VehicleTests

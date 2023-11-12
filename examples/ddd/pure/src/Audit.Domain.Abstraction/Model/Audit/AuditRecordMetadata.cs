@@ -1,6 +1,4 @@
-using Audit.Domain.Model.Audit;
-
-namespace Audit.Domain.Model.Vehicles;
+namespace Audit.Domain.Abstraction.Model.Audit;
 
 public class AuditRecordMetadata<T> where T : IAuditRecord
 {

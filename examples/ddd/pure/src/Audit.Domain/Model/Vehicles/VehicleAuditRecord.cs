@@ -1,4 +1,4 @@
-using Audit.Domain.Model.Audit;
+using Audit.Domain.Abstraction.Model.Audit;
 
 namespace Audit.Domain.Model.Vehicles;
 

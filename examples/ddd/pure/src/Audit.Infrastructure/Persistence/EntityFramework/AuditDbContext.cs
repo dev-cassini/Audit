@@ -1,7 +1,9 @@
 using System.Reflection;
+using Audit.Domain.Abstraction.Model.Audit;
 using Audit.Domain.Model.Vehicles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Vehicle = Audit.Domain.Abstraction.Model.Vehicle;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework;
 

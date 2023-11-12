@@ -1,4 +1,4 @@
-namespace Audit.Domain.Model.Audit;
+namespace Audit.Domain.Abstraction.Model.Audit;
 
 public interface IAuditable<out T> where T : IAuditRecord
 {

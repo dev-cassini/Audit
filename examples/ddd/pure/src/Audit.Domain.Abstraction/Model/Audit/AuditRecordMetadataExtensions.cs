@@ -1,6 +1,4 @@
-using Audit.Domain.Model.Vehicles;
-
-namespace Audit.Domain.Model.Audit;
+namespace Audit.Domain.Abstraction.Model.Audit;
 
 public static class AuditRecordMetadataExtensions
 {
