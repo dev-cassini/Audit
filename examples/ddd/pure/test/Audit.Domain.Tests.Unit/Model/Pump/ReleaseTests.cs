@@ -10,7 +10,7 @@ public class ReleaseTests
     [Test]
     public void GivenPumpIsFree_WhenPumpIsReleased_ThenVehicleAuditRecordIsNotCreated()
     {
-        var car = new Car(FuelType.Diesel, 100, 150);
+        var car = new Car(Guid.NewGuid(), FuelType.Diesel, 100, 150);
         var forecourt = new Forecourt(Guid.NewGuid());
         var lane = forecourt.AddLane();
         var pump = lane.AddPump();
@@ -25,7 +25,7 @@ public class ReleaseTests
     [Test]
     public void GivenPumpIsFilling_WhenPumpIsReleased_ThenVehicleFuelLevelIsUpdatedToTankCapacity()
     {
-        var car = new Car(FuelType.Diesel, 100, 150);
+        var car = new Car(Guid.NewGuid(), FuelType.Diesel, 100, 150);
         var forecourt = new Forecourt(Guid.NewGuid());
         var lane = forecourt.AddLane();
         var pump = lane.AddPump();
@@ -39,7 +39,7 @@ public class ReleaseTests
     [Test]
     public void GivenPumpIsFilling_WhenPumpIsReleased_ThenVehicleAuditRecordIsCreated()
     {
-        var car = new Car(FuelType.Diesel, 100, 150);
+        var car = new Car(Guid.NewGuid(), FuelType.Diesel, 100, 150);
         var forecourt = new Forecourt(Guid.NewGuid());
         var lane = forecourt.AddLane();
         var pump = lane.AddPump();
@@ -56,7 +56,7 @@ public class ReleaseTests
     public void GivenPumpIsFilling_WhenPumpIsReleased_ThenAuditRecordMetadataIsCreatedForFuelLevel()
     {
         const int originalFuelLevel = 100;
-        var car = new Car(FuelType.Diesel, originalFuelLevel, originalFuelLevel + 50);
+        var car = new Car(Guid.NewGuid(), FuelType.Diesel, originalFuelLevel, originalFuelLevel + 50);
         var forecourt = new Forecourt(Guid.NewGuid());
         var lane = forecourt.AddLane();
         var pump = lane.AddPump();
@@ -80,7 +80,7 @@ public class ReleaseTests
     [Test]
     public void GivenPumpIsFilling_WhenPumpIsReleased_ThenVehicleIsUnassignedFromPump()
     {
-        var car = new Car(FuelType.Diesel, 100, 150);
+        var car = new Car(Guid.NewGuid(), FuelType.Diesel, 100, 150);
         var forecourt = new Forecourt(Guid.NewGuid());
         var lane = forecourt.AddLane();
         var pump = lane.AddPump();

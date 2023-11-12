@@ -46,12 +46,12 @@ public class VehicleTests
     
     private class TestVehicle : Vehicle
     {
-        public TestVehicle(
+        private TestVehicle(
             VehicleType type,
             FuelType fuelType,
             int fuelLevel,
             int tankCapacity) 
-            : base(type, fuelType, fuelLevel, tankCapacity) { }
+            : base(Guid.NewGuid(), type, fuelType, fuelLevel, tankCapacity) { }
 
         public static TestVehicle Create() 
             => new(VehicleType.Car, FuelType.Diesel, 100, 150);

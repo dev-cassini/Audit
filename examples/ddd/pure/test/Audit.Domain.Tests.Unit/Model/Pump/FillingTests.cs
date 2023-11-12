@@ -10,7 +10,7 @@ public class FillingTests
     [Test]
     public void GivenPumpIsFree_WhenPumpIsFilling_ThenPumpIsAssignedToVehicle()
     {
-        var car = new Car(FuelType.Diesel, 100, 150);
+        var car = new Car(Guid.NewGuid(), FuelType.Diesel, 100, 150);
         var forecourt = new Forecourt(Guid.NewGuid());
         var lane = forecourt.AddLane();
         var pump = lane.AddPump();
