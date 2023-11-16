@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Domain.Tests.Unit", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Domain.Abstraction", "examples\ddd\pure\src\Audit.Domain.Abstraction\Audit.Domain.Abstraction.csproj", "{D09B238D-1DB4-45C0-8440-7BCF20F9CA0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Tool", "examples\ddd\pure\src\Audit.Tool\Audit.Tool.csproj", "{5B6FDF94-7577-4B19-A19B-4C0D38ED716F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{D09B238D-1DB4-45C0-8440-7BCF20F9CA0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D09B238D-1DB4-45C0-8440-7BCF20F9CA0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D09B238D-1DB4-45C0-8440-7BCF20F9CA0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B6FDF94-7577-4B19-A19B-4C0D38ED716F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B6FDF94-7577-4B19-A19B-4C0D38ED716F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B6FDF94-7577-4B19-A19B-4C0D38ED716F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B6FDF94-7577-4B19-A19B-4C0D38ED716F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A6F6F9E-7FFF-49E2-9293-1A617DC23637} = {FBE25B3A-84A8-4D90-8CD0-3062D4566B46}
@@ -50,5 +56,6 @@ Global
 		{3A5E4C1C-6F4C-4CEA-B619-9441B1F549ED} = {4E75BA10-9FFC-4810-9E16-0F00DE95CCFD}
 		{03E74CDE-6FA6-4E1B-8B0A-F1A991D7B202} = {3A5E4C1C-6F4C-4CEA-B619-9441B1F549ED}
 		{D09B238D-1DB4-45C0-8440-7BCF20F9CA0F} = {FBE25B3A-84A8-4D90-8CD0-3062D4566B46}
+		{5B6FDF94-7577-4B19-A19B-4C0D38ED716F} = {FBE25B3A-84A8-4D90-8CD0-3062D4566B46}
 	EndGlobalSection
 EndGlobal
