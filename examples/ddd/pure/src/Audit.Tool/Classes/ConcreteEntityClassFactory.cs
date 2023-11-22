@@ -10,7 +10,8 @@ public class ConcreteEntityClassFactory
 {
     public CompilationUnitSyntax Create()
     {
-        var auditRecordProperty = PrivateReadonlyListOfAuditRecords();
+        var privateAuditRecordProperty = PrivateReadonlyListOfAuditRecords();
+        var publicAuditRecordProperty = PublicEnumerableOfAuditRecordsAutoProperty();
         
         var compilationUnitSyntax = CompilationUnit()
             .AddUsings(UsingDirective(ParseName("Audit.Domain.Abstraction.Model.Audit")));
@@ -20,7 +21,8 @@ public class ConcreteEntityClassFactory
             .AddBaseListTypes(
                 SimpleBaseType(ParseTypeName("Abstraction.Model.Pump")),
                 SimpleBaseType(ParseTypeName("IAuditable<PumpAuditRecord>")))
-            .AddMembers(auditRecordProperty);
+            .AddMembers(privateAuditRecordProperty)
+            .AddMembers(publicAuditRecordProperty);
 
         var @namespace = FileScopedNamespaceDeclaration(ParseName("Audit.Domain.Model")).NormalizeWhitespace()
             .AddMembers(@class);
@@ -39,13 +41,14 @@ public class ConcreteEntityClassFactory
             .AddModifiers(Token(SyntaxKind.PrivateKeyword), Token(SyntaxKind.ReadOnlyKeyword));
     }
     
-    private FieldDeclarationSyntax PublicReadonlyListOfAuditRecords()
+    private PropertyDeclarationSyntax PublicEnumerableOfAuditRecordsAutoProperty()
     {
-        var auditRecordProperty = VariableDeclaration(ParseTypeName("List<PumpAuditRecord>"))
-            .AddVariables(VariableDeclarator("_auditRecords")
-                .WithInitializer(EqualsValueClause(ImplicitObjectCreationExpression())));
-
-        return FieldDeclaration(auditRecordProperty)
+        return PropertyDeclaration(
+            GenericName(Identifier("IEnumerable"),
+                TypeArgumentList(Token(SyntaxKind.LessThanToken),
+                    new SeparatedSyntaxList<TypeSyntax> { IdentifierName(Identifier("PumpAuditRecord")) },
+                    Token(SyntaxKind.GreaterThanToken))),
+            Identifier("AuditRecords"))
             .AddModifiers(Token(SyntaxKind.PublicKeyword));
     }
 }
