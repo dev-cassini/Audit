@@ -1,3 +1,4 @@
+using System.Collections;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -24,7 +25,8 @@ public class ConcreteEntityClassFactory
             .AddMembers(privateAuditRecordProperty)
             .AddMembers(publicAuditRecordProperty);
 
-        var @namespace = FileScopedNamespaceDeclaration(ParseName("Audit.Domain.Model")).NormalizeWhitespace()
+        var @namespace = FileScopedNamespaceDeclaration(ParseName("Audit.Domain.Model"))
+            .NormalizeWhitespace()
             .AddMembers(@class);
 
         return compilationUnitSyntax
@@ -43,12 +45,32 @@ public class ConcreteEntityClassFactory
     
     private PropertyDeclarationSyntax PublicEnumerableOfAuditRecordsAutoProperty()
     {
+        var arrowExpressionClause = ArrowExpressionClause(InvocationExpression(
+            MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression, 
+                IdentifierName("_auditRecords"),
+                IdentifierName("Where")),
+            ArgumentList(SeparatedList(new List<ArgumentSyntax>
+            {
+                Argument(
+                    SimpleLambdaExpression(
+                        Parameter(Identifier("x")),
+                        InvocationExpression(
+                            MemberAccessExpression(
+                                SyntaxKind.SimpleMemberAccessExpression,
+                                MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, IdentifierName("x"),
+                                    IdentifierName("Metadata")),
+                                IdentifierName("Any")))))
+            }))));
+        
         return PropertyDeclaration(
-            GenericName(Identifier("IEnumerable"),
-                TypeArgumentList(Token(SyntaxKind.LessThanToken),
-                    new SeparatedSyntaxList<TypeSyntax> { IdentifierName(Identifier("PumpAuditRecord")) },
-                    Token(SyntaxKind.GreaterThanToken))),
-            Identifier("AuditRecords"))
+                GenericName(Identifier(nameof(IEnumerable)),
+                    TypeArgumentList(Token(SyntaxKind.LessThanToken),
+                        new SeparatedSyntaxList<TypeSyntax> { ParseTypeName("PumpAuditRecord") }, //TODO: figure out why this is blank
+                        Token(SyntaxKind.GreaterThanToken))),
+                Identifier("AuditRecords"))
+            .WithExpressionBody(arrowExpressionClause)
+            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken))
             .AddModifiers(Token(SyntaxKind.PublicKeyword));
     }
 }
