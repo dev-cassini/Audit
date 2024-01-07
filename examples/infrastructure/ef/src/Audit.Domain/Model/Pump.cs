@@ -15,7 +15,7 @@ public class Pump
     public Guid LaneId { get; }
     public Lane Lane { get; } = null!;
 
-    protected Pump(Guid id, Lane lane)
+    public Pump(Guid id, Lane lane)
     {
         Id = id;
         LaneId = lane.Id;

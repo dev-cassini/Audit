@@ -10,7 +10,7 @@ public class Forecourt
     private readonly List<Transaction> _transactions = new();
     public IEnumerable<Transaction> Transactions => _transactions.AsReadOnly();
 
-    protected Forecourt(Guid id)
+    public Forecourt(Guid id)
     {
         Id = id;
     }

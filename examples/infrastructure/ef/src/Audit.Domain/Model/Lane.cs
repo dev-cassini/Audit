@@ -10,7 +10,7 @@ public class Lane
     public Guid ForecourtId { get; }
     public Forecourt Forecourt { get; } = null!;
 
-    protected Lane(Guid id, Forecourt forecourt)
+    public Lane(Guid id, Forecourt forecourt)
     {
         Id = id;
         ForecourtId = forecourt.Id;

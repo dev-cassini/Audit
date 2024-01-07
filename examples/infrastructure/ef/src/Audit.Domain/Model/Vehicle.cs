@@ -8,7 +8,7 @@ public class Vehicle
     public int FuelLevel { get; set; }
     public int TankCapacity { get; }
     
-    protected Vehicle(
+    public Vehicle(
         Guid id,
         string type, 
         string fuelType, 

@@ -1,11 +1,12 @@
 using System.Reflection;
 using Audit.Domain.Model;
+using Audit.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework;
 
-public class DbContext : Microsoft.EntityFrameworkCore.DbContext
+public class DbContext : AuditDbContext
 {
     public DbSet<Pump> Pumps { get; set; } = null!;
     public DbSet<Vehicle> Vehicles { get; set; } = null!;
