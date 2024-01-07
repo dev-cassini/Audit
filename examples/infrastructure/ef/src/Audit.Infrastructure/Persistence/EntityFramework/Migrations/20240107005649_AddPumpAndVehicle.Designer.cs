@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Migrations
 {
-    [DbContext(typeof(AuditDbContext))]
+    [DbContext(typeof(DbContext))]
     [Migration("20240107005649_AddPumpAndVehicle")]
     partial class AddPumpAndVehicle
     {

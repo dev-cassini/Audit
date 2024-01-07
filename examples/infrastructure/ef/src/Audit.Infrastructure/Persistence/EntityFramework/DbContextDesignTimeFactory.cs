@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework;
 
-public class AuditDbContextDesignTimeFactory : IDesignTimeDbContextFactory<AuditDbContext>
+public class DbContextDesignTimeFactory : IDesignTimeDbContextFactory<DbContext>
 {
-    public AuditDbContext CreateDbContext(string[] args)
+    public DbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<AuditDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
         optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=password;Database=Audit.Infrastructure.Ef;Include Error Detail=true");
 
-        return new AuditDbContext(optionsBuilder.Options);
+        return new DbContext(optionsBuilder.Options);
     }
 }

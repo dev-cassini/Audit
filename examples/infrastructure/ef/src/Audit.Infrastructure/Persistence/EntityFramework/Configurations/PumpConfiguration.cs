@@ -8,7 +8,7 @@ public class PumpConfiguration : IEntityTypeConfiguration<Pump>
 {
     public void Configure(EntityTypeBuilder<Pump> builder)
     {
-        builder.ToTable(nameof(AuditDbContext.Pumps));
+        builder.ToTable(nameof(DbContext.Pumps));
         
         builder.HasKey(x => x.Id);
         builder.Property(x => x.VehicleId);

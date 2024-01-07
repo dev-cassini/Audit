@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Migrations
 {
-    [DbContext(typeof(AuditDbContext))]
+    [DbContext(typeof(DbContext))]
     partial class AuditDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

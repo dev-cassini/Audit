@@ -8,7 +8,7 @@ public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
 {
     public void Configure(EntityTypeBuilder<Vehicle> builder)
     {
-        builder.ToTable(nameof(AuditDbContext.Vehicles));
+        builder.ToTable(nameof(DbContext.Vehicles));
         
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Type);

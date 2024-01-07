@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework;
 
-public class AuditDbContext : DbContext
+public class DbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public DbSet<Pump> Pumps { get; set; } = null!;
     public DbSet<Vehicle> Vehicles { get; set; } = null!;
     
-    public AuditDbContext(DbContextOptions<AuditDbContext> options) : base(options) { }
+    public DbContext(DbContextOptions<DbContext> options) : base(options) { }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
