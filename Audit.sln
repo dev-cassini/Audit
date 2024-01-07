@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6A1935A2-203
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Domain", "examples\infrastructure\ef\src\Audit.Domain\Audit.Domain.csproj", "{6AEB9852-8337-4B5D-AAF0-AA6945284472}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Infrastructure", "examples\infrastructure\ef\src\Audit.Infrastructure\Audit.Infrastructure.csproj", "{F6528F25-DA6D-4A61-8D89-378B141E2727}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{6AEB9852-8337-4B5D-AAF0-AA6945284472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AEB9852-8337-4B5D-AAF0-AA6945284472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AEB9852-8337-4B5D-AAF0-AA6945284472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6528F25-DA6D-4A61-8D89-378B141E2727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6528F25-DA6D-4A61-8D89-378B141E2727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6528F25-DA6D-4A61-8D89-378B141E2727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6528F25-DA6D-4A61-8D89-378B141E2727}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A6F6F9E-7FFF-49E2-9293-1A617DC23637} = {FBE25B3A-84A8-4D90-8CD0-3062D4566B46}
@@ -73,5 +79,6 @@ Global
 		{718325B3-C9AF-47D8-B6B8-523A7911BA88} = {C35EA553-2E4B-4D02-8BB5-0311E7862912}
 		{6A1935A2-2038-4FCA-959E-3C640997EBEC} = {718325B3-C9AF-47D8-B6B8-523A7911BA88}
 		{6AEB9852-8337-4B5D-AAF0-AA6945284472} = {6A1935A2-2038-4FCA-959E-3C640997EBEC}
+		{F6528F25-DA6D-4A61-8D89-378B141E2727} = {6A1935A2-2038-4FCA-959E-3C640997EBEC}
 	EndGlobalSection
 EndGlobal
