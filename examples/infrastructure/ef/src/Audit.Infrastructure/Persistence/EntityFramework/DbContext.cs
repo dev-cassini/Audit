@@ -1,6 +1,7 @@
 using System.Reflection;
 using Audit.Domain.Abstraction.Model.Audit;
 using Audit.Domain.Model;
+using Audit.Infrastructure.Persistence.EntityFramework.Interceptors.SaveChanges;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -10,9 +11,10 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public DbSet<Pump> Pumps { get; set; } = null!;
     public DbSet<PumpAuditRecord> PumpAuditRecords { get; set; } = null!;
-    public DbSet<AuditRecordMetadata<PumpAuditRecord>> PumpAuditRecordMetadata { get; set; } = null!;
+    public DbSet<AuditRecordMetadata> PumpAuditRecordMetadata { get; set; } = null!;
     public DbSet<Vehicle> Vehicles { get; set; } = null!;
     
+    protected DbContext() { }
     public DbContext(DbContextOptions<DbContext> options) : base(options) { }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,4 +29,7 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
             }
         }
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.AddInterceptors(new CreateAuditInterceptor<PumpAuditRecord>());
 }

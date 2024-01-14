@@ -1,13 +1,12 @@
 using Audit.Domain.Abstraction.Model.Audit;
-using Audit.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Configurations;
 
-public class PumpAuditRecordMetadataConfiguration : IEntityTypeConfiguration<AuditRecordMetadata<PumpAuditRecord>>
+public class PumpAuditRecordMetadataConfiguration : IEntityTypeConfiguration<AuditRecordMetadata>
 {
-    public void Configure(EntityTypeBuilder<AuditRecordMetadata<PumpAuditRecord>> builder)
+    public void Configure(EntityTypeBuilder<AuditRecordMetadata> builder)
     {
         builder.ToTable(nameof(DbContext.PumpAuditRecordMetadata));
 

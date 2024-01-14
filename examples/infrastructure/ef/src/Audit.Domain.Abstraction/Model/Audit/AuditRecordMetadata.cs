@@ -1,6 +1,6 @@
 namespace Audit.Domain.Abstraction.Model.Audit;
 
-public class AuditRecordMetadata<T> where T : IAuditRecord
+public class AuditRecordMetadata
 {
     public Guid Id { get; } = Guid.NewGuid();
     public Guid AuditRecordId { get; }
@@ -9,7 +9,7 @@ public class AuditRecordMetadata<T> where T : IAuditRecord
     public string? UpdatedValue { get; }
     
     public AuditRecordMetadata(
-        T auditRecord, 
+        IAuditRecord auditRecord, 
         string propertyName, 
         string? originalValue, 
         string? updatedValue)
