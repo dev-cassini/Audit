@@ -1,4 +1,4 @@
-namespace Audit.Domain.Model.Enums;
+namespace Audit.Domain.Abstraction.Enums;
 
 public static class VehicleType
 {

@@ -1,25 +1,19 @@
+using Audit.Domain.Abstraction.Model.Audit;
+
 namespace Audit.Domain.Model;
 
-public class Pump
+public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
 {
-    /// <summary>
-    /// Fuel dispense rate in litres per second.
-    /// </summary>
-    public const decimal FuelDispenseRate = 1.5m;
-    
-    public virtual Guid Id { get; }
-    
-    public Guid? VehicleId { get; private set; }
     public Vehicle? Vehicle { get; private set; }
     
-    public Guid LaneId { get; }
-    public Lane Lane { get; } = null!;
+    private readonly List<PumpAuditRecord> _auditRecords = new();
+    public IEnumerable<PumpAuditRecord> AuditRecords => _auditRecords.Where(x => x.Metadata.Any());
 
-    public Pump(Guid id, Lane lane)
+    public Pump(Guid id, Lane lane) : base(id, lane) { }
+    
+    public void AddAuditRecord()
     {
-        Id = id;
-        LaneId = lane.Id;
-        Lane = lane;
+        throw new NotImplementedException();
     }
     
     #region EF Constructor

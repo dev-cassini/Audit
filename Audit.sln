@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4F8F1304-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Infrastructure.Tests.Integration", "examples\infrastructure\ef\test\Audit.Infrastructure.Tests.Integration\Audit.Infrastructure.Tests.Integration.csproj", "{D683355A-1A2A-4897-AE3D-65968DE44DB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Domain.Abstraction", "examples\infrastructure\ef\src\Audit.Domain.Abstraction\Audit.Domain.Abstraction.csproj", "{410AC00F-32C5-41D3-BC63-68436E72FF01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{D683355A-1A2A-4897-AE3D-65968DE44DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D683355A-1A2A-4897-AE3D-65968DE44DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D683355A-1A2A-4897-AE3D-65968DE44DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{410AC00F-32C5-41D3-BC63-68436E72FF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{410AC00F-32C5-41D3-BC63-68436E72FF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{410AC00F-32C5-41D3-BC63-68436E72FF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{410AC00F-32C5-41D3-BC63-68436E72FF01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A6F6F9E-7FFF-49E2-9293-1A617DC23637} = {FBE25B3A-84A8-4D90-8CD0-3062D4566B46}
@@ -90,5 +96,6 @@ Global
 		{F6528F25-DA6D-4A61-8D89-378B141E2727} = {6A1935A2-2038-4FCA-959E-3C640997EBEC}
 		{4F8F1304-992E-4F5A-B5F1-C0E69FB3C8D7} = {718325B3-C9AF-47D8-B6B8-523A7911BA88}
 		{D683355A-1A2A-4897-AE3D-65968DE44DB6} = {4F8F1304-992E-4F5A-B5F1-C0E69FB3C8D7}
+		{410AC00F-32C5-41D3-BC63-68436E72FF01} = {6A1935A2-2038-4FCA-959E-3C640997EBEC}
 	EndGlobalSection
 EndGlobal
