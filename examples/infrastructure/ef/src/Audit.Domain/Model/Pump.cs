@@ -8,7 +8,7 @@ public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
     
     private readonly List<PumpAuditRecord> _auditRecords = new();
     public IEnumerable<PumpAuditRecord> AuditRecords => _auditRecords.Where(x => x.Metadata.Any());
-
+    
     public Pump(Guid id, Lane lane) : base(id, lane) { }
     
     public void AddAuditRecord(Dictionary<string, (string? OriginalValue, string? UpdatedValue)> changes)
@@ -19,6 +19,6 @@ public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
     
     #region EF Constructor
     // ReSharper disable once UnusedMember.Local
-    private Pump() { }
+    protected Pump() { }
     #endregion
 }

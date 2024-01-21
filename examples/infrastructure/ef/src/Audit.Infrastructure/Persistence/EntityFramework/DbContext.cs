@@ -9,6 +9,8 @@ namespace Audit.Infrastructure.Persistence.EntityFramework;
 
 public class DbContext : Microsoft.EntityFrameworkCore.DbContext
 {
+    public DbSet<Forecourt> Forecourts { get; set; } = null!;
+    public DbSet<Lane> Lanes { get; set; } = null!;
     public DbSet<Pump> Pumps { get; set; } = null!;
     public DbSet<PumpAuditRecord> PumpAuditRecords { get; set; } = null!;
     public DbSet<AuditRecordMetadata> PumpAuditRecordMetadata { get; set; } = null!;

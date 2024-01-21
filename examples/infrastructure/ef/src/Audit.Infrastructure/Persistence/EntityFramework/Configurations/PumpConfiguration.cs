@@ -15,6 +15,11 @@ public class PumpConfiguration : IEntityTypeConfiguration<Pump>
         builder.Property(x => x.LaneId);
 
         builder
+            .HasMany(x => x.AuditRecords)
+            .WithOne()
+            .HasForeignKey(x => x.PumpId);
+        
+        builder
             .HasOne(x => x.Vehicle)
             .WithOne()
             .HasForeignKey<Pump>(x => x.VehicleId)

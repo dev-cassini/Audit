@@ -16,11 +16,6 @@ public class PumpAuditRecordConfiguration : IEntityTypeConfiguration<PumpAuditRe
         builder.Property(x => x.LaneId);
         
         builder
-            .HasOne(x => x.Pump)
-            .WithMany(x => x.AuditRecords)
-            .HasForeignKey(x => x.PumpId);
-        
-        builder
             .HasMany(x => x.Metadata)
             .WithOne()
             .HasForeignKey(x => x.AuditRecordId);
