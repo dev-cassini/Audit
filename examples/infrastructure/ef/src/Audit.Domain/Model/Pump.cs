@@ -4,7 +4,7 @@ namespace Audit.Domain.Model;
 
 public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
 {
-    public Vehicle? Vehicle { get; }
+    public Vehicle? Vehicle { get; private set; }
     
     private readonly List<PumpAuditRecord> _auditRecords = new();
     public IEnumerable<PumpAuditRecord> AuditRecords => _auditRecords.Where(x => x.Metadata.Any());
@@ -15,6 +15,12 @@ public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
     {
         var auditRecord = new PumpAuditRecord(this, changes);
         _auditRecords.Add(auditRecord);
+    }
+    
+    public void Filling(Vehicle vehicle)
+    {
+        VehicleId = vehicle.Id;
+        Vehicle = vehicle;
     }
     
     #region EF Constructor
