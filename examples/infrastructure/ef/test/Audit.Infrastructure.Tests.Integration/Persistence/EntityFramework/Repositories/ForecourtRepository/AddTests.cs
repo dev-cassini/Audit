@@ -190,7 +190,7 @@ public class AddTests
     }
     
     [Test]
-    public async Task ForEachPumpAuditRecordACreationMetadataIsAddedToDatabase()
+    public async Task ForEachPumpAuditRecordACreationAuditMetadataIsAddedToDatabase()
     {
         var utcNow = EfSqlLiteDatabaseSetUpFixture.DateTimeProvider.UtcNow;
         var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
@@ -206,6 +206,7 @@ public class AddTests
             var pumpAuditRecords = _forecourt.Lanes
                 .SelectMany(x => x.Pumps)
                 .SelectMany(x => x.AuditRecords);
+            
             foreach (var pumpAuditRecord in pumpAuditRecords)
             {
                 var dbPumpAuditRecord = dbForecourt.Lanes
@@ -218,6 +219,35 @@ public class AddTests
                 Assert.That(dbPumpAuditRecord.Metadata.Single().PropertyName, Is.EqualTo("CreationDateTimeUtc"));
                 Assert.That(dbPumpAuditRecord.Metadata.Single().OriginalValue, Is.Null);
                 Assert.That(dbPumpAuditRecord.Metadata.Single().UpdatedValue, Is.EqualTo(utcNow.ToString()));
+            }
+        });
+    }
+    
+    [Test]
+    public async Task PumpAuditRecordTimestampIsEqualToCreationAuditMetadataUpdatedValue()
+    {
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+
+        var dbForecourt = await dbContext.Forecourts
+            .Include(x => x.Lanes)
+            .ThenInclude(x => x.Pumps)
+            .ThenInclude(pump => pump.AuditRecords)
+            .SingleAsync(x => x.Id == _forecourt.Id);
+        
+        Assert.Multiple(() =>
+        {
+            var pumpAuditRecords = _forecourt.Lanes
+                .SelectMany(x => x.Pumps)
+                .SelectMany(x => x.AuditRecords);
+            
+            foreach (var pumpAuditRecord in pumpAuditRecords)
+            {
+                var dbPumpAuditRecord = dbForecourt.Lanes
+                    .SelectMany(x => x.Pumps)
+                    .SelectMany(x => x.AuditRecords)
+                    .Single(x => x.Id == pumpAuditRecord.Id);
+                
+                Assert.That(dbPumpAuditRecord.Timestamp.ToString(), Is.EqualTo(dbPumpAuditRecord.Metadata.Single().UpdatedValue));
             }
         });
     }
