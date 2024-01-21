@@ -1,4 +1,6 @@
 using Audit.Domain.Abstraction.Model.Audit;
+using Audit.Domain.Abstraction.Tooling;
+using Audit.Domain.Tooling;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -6,6 +8,13 @@ namespace Audit.Infrastructure.Persistence.EntityFramework.Interceptors.SaveChan
 
 public class CreateAuditInterceptor<T> : ISaveChangesInterceptor where T : IAuditRecord
 {
+    private readonly IDateTimeProvider _dateTimeProvider;
+
+    public CreateAuditInterceptor(IDateTimeProvider dateTimeProvider)
+    {
+        _dateTimeProvider = dateTimeProvider;
+    }
+    
     public ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
@@ -24,10 +33,10 @@ public class CreateAuditInterceptor<T> : ISaveChangesInterceptor where T : IAudi
 
             var changes = new Dictionary<string, (string? OriginalValue, string? UpdatedValue)>
             {
-                { "CreationDateTimeUtc", (null, DateTimeOffset.UtcNow.ToString()) }
+                { "CreationDateTimeUtc", (null, _dateTimeProvider.UtcNow.ToString()) }
             };
             
-            auditableEntity.AddAuditRecord(changes);
+            auditableEntity.AddAuditRecord(changes, _dateTimeProvider);
         }
 
         return ValueTask.FromResult(result);

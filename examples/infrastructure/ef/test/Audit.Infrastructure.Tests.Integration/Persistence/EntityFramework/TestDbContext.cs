@@ -1,3 +1,5 @@
+using Audit.Domain.Abstraction.Tooling;
+using Audit.Domain.Tooling;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +11,9 @@ public class TestDbContext : DbContext
 {
     private readonly SqliteConnection _sqliteConnection;
 
-    public TestDbContext(SqliteConnection sqliteConnection)
+    public TestDbContext(
+        SqliteConnection sqliteConnection,
+        IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
     {
         _sqliteConnection = sqliteConnection;
     }

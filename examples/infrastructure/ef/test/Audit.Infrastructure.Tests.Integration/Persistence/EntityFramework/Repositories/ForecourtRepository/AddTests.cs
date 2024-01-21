@@ -9,7 +9,6 @@ using ForecourtRepository = Infrastructure.Persistence.EntityFramework.Repositor
 [TestFixture]
 public class AddTests
 {
-    private readonly DateTimeOffset _dateTimeUtcNow = DateTimeOffset.UtcNow;
     private Forecourt _forecourt = null!;
     
     [OneTimeSetUp]
@@ -166,6 +165,7 @@ public class AddTests
     [Test]
     public async Task PumpAuditRecordTimestampIsSetToDateTimeUtcNow()
     {
+        var utcNow = EfSqlLiteDatabaseSetUpFixture.DateTimeProvider.UtcNow;
         var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
 
         var dbForecourt = await dbContext.Forecourts
@@ -184,7 +184,7 @@ public class AddTests
                 
                 var dbPumpAuditRecord = dbPump.AuditRecords.Single();
                 
-                Assert.That(dbPumpAuditRecord.Timestamp, Is.EqualTo(_dateTimeUtcNow).Within(5).Seconds);
+                Assert.That(dbPumpAuditRecord.Timestamp, Is.EqualTo(utcNow));
             }
         });
     }
@@ -192,6 +192,7 @@ public class AddTests
     [Test]
     public async Task ForEachPumpAuditRecordACreationMetadataIsAddedToDatabase()
     {
+        var utcNow = EfSqlLiteDatabaseSetUpFixture.DateTimeProvider.UtcNow;
         var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
 
         var dbForecourt = await dbContext.Forecourts
@@ -216,7 +217,7 @@ public class AddTests
                 Assert.That(dbPumpAuditRecord.Metadata.Single().AuditRecordId, Is.EqualTo(pumpAuditRecord.Id));
                 Assert.That(dbPumpAuditRecord.Metadata.Single().PropertyName, Is.EqualTo("CreationDateTimeUtc"));
                 Assert.That(dbPumpAuditRecord.Metadata.Single().OriginalValue, Is.Null);
-                Assert.That(dbPumpAuditRecord.Metadata.Single().UpdatedValue, Is.EqualTo(_dateTimeUtcNow.ToString()).Within(5).Seconds);
+                Assert.That(dbPumpAuditRecord.Metadata.Single().UpdatedValue, Is.EqualTo(utcNow.ToString()));
             }
         });
     }

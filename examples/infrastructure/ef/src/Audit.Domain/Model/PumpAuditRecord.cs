@@ -1,20 +1,23 @@
 using Audit.Domain.Abstraction.Model.Audit;
+using Audit.Domain.Abstraction.Tooling;
 
 namespace Audit.Domain.Model;
 
 public class PumpAuditRecord : Abstraction.Model.Pump, IAuditRecord
 {
     public sealed override Guid Id { get; } = Guid.NewGuid();
-    public DateTimeOffset Timestamp { get; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset Timestamp { get; }
     public IReadOnlyCollection<AuditRecordMetadata> Metadata = null!;
     public Guid PumpId { get; }
 
     public PumpAuditRecord(
         Pump pump, 
-        Dictionary<string, (string? OriginalValue, string? UpdatedValue)> changes)
+        Dictionary<string, (string? OriginalValue, string? UpdatedValue)> changes,
+        IDateTimeProvider dateTimeProvider)
     : base(pump.Id, pump.LaneId, pump.VehicleId)
     {
         PumpId = pump.Id;
+        Timestamp = dateTimeProvider.UtcNow;
 
         var metadata = changes.Select(x => new AuditRecordMetadata(
             this,

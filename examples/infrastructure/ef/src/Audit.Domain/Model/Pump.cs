@@ -1,4 +1,5 @@
 using Audit.Domain.Abstraction.Model.Audit;
+using Audit.Domain.Abstraction.Tooling;
 
 namespace Audit.Domain.Model;
 
@@ -11,9 +12,11 @@ public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
     
     public Pump(Guid id, Lane lane) : base(id, lane.Id, null) { }
     
-    public void AddAuditRecord(Dictionary<string, (string? OriginalValue, string? UpdatedValue)> changes)
+    public void AddAuditRecord(
+        Dictionary<string, (string? OriginalValue, string? UpdatedValue)> changes,
+        IDateTimeProvider dateTimeProvider)
     {
-        var auditRecord = new PumpAuditRecord(this, changes);
+        var auditRecord = new PumpAuditRecord(this, changes, dateTimeProvider);
         _auditRecords.Add(auditRecord);
     }
     
