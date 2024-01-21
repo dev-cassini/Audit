@@ -11,10 +11,11 @@ public abstract class Pump
     public Guid? VehicleId { get; protected set; }
     public Guid LaneId { get; }
 
-    protected Pump(Guid id, Lane lane)
+    protected Pump(Guid id, Guid laneId, Guid? vehicleId)
     {
         Id = id;
-        LaneId = lane.Id;
+        LaneId = laneId;
+        VehicleId = vehicleId;
     }
     
     #region EF Constructor

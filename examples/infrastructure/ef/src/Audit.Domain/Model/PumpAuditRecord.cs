@@ -12,6 +12,7 @@ public class PumpAuditRecord : Abstraction.Model.Pump, IAuditRecord
     public PumpAuditRecord(
         Pump pump, 
         Dictionary<string, (string? OriginalValue, string? UpdatedValue)> changes)
+    : base(pump.Id, pump.LaneId, pump.VehicleId)
     {
         PumpId = pump.Id;
 

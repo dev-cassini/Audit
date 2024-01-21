@@ -9,6 +9,7 @@ using ForecourtRepository = Infrastructure.Persistence.EntityFramework.Repositor
 [TestFixture]
 public class AddTests
 {
+    private readonly DateTimeOffset _dateTimeUtcNow = DateTimeOffset.UtcNow;
     private Forecourt _forecourt = null!;
     
     [OneTimeSetUp]
@@ -131,6 +132,91 @@ public class AddTests
                     .Single(x => x.Id == pump.Id);
                 
                 Assert.That(dbPump.VehicleId, Is.EqualTo(pump.VehicleId));
+            }
+        });
+    }
+    
+    [Test]
+    public async Task ForEachPumpAPumpAuditRecordIsAddedToDatabase()
+    {
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+
+        var dbForecourt = await dbContext.Forecourts
+            .Include(x => x.Lanes)
+            .ThenInclude(x => x.Pumps)
+            .ThenInclude(pump => pump.AuditRecords)
+            .SingleAsync(x => x.Id == _forecourt.Id);
+        
+        Assert.Multiple(() =>
+        {
+            foreach (var pump in _forecourt.Lanes.SelectMany(x => x.Pumps))
+            {
+                var dbPump = dbForecourt.Lanes
+                    .SelectMany(x => x.Pumps)
+                    .Single(x => x.Id == pump.Id);
+                
+                Assert.That(dbPump.AuditRecords.ToList(), Has.Count.EqualTo(1));
+                Assert.That(dbPump.AuditRecords.Single().PumpId, Is.EqualTo(pump.Id));
+                Assert.That(dbPump.AuditRecords.Single().LaneId, Is.EqualTo(pump.LaneId));
+                Assert.That(dbPump.AuditRecords.Single().VehicleId, Is.EqualTo(pump.VehicleId));
+            }
+        });
+    }
+    
+    [Test]
+    public async Task PumpAuditRecordTimestampIsSetToDateTimeUtcNow()
+    {
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+
+        var dbForecourt = await dbContext.Forecourts
+            .Include(x => x.Lanes)
+            .ThenInclude(x => x.Pumps)
+            .ThenInclude(pump => pump.AuditRecords)
+            .SingleAsync(x => x.Id == _forecourt.Id);
+        
+        Assert.Multiple(() =>
+        {
+            foreach (var pump in _forecourt.Lanes.SelectMany(x => x.Pumps))
+            {
+                var dbPump = dbForecourt.Lanes
+                    .SelectMany(x => x.Pumps)
+                    .Single(x => x.Id == pump.Id);
+                
+                var dbPumpAuditRecord = dbPump.AuditRecords.Single();
+                
+                Assert.That(dbPumpAuditRecord.Timestamp, Is.EqualTo(_dateTimeUtcNow).Within(5).Seconds);
+            }
+        });
+    }
+    
+    [Test]
+    public async Task ForEachPumpAuditRecordACreationMetadataIsAddedToDatabase()
+    {
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+
+        var dbForecourt = await dbContext.Forecourts
+            .Include(x => x.Lanes)
+            .ThenInclude(x => x.Pumps)
+            .ThenInclude(pump => pump.AuditRecords)
+            .SingleAsync(x => x.Id == _forecourt.Id);
+        
+        Assert.Multiple(() =>
+        {
+            var pumpAuditRecords = _forecourt.Lanes
+                .SelectMany(x => x.Pumps)
+                .SelectMany(x => x.AuditRecords);
+            foreach (var pumpAuditRecord in pumpAuditRecords)
+            {
+                var dbPumpAuditRecord = dbForecourt.Lanes
+                    .SelectMany(x => x.Pumps)
+                    .SelectMany(x => x.AuditRecords)
+                    .Single(x => x.Id == pumpAuditRecord.Id);
+                
+                Assert.That(dbPumpAuditRecord.Metadata.ToList(), Has.Count.EqualTo(1));
+                Assert.That(dbPumpAuditRecord.Metadata.Single().AuditRecordId, Is.EqualTo(pumpAuditRecord.Id));
+                Assert.That(dbPumpAuditRecord.Metadata.Single().PropertyName, Is.EqualTo("CreationDateTimeUtc"));
+                Assert.That(dbPumpAuditRecord.Metadata.Single().OriginalValue, Is.Null);
+                Assert.That(dbPumpAuditRecord.Metadata.Single().UpdatedValue, Is.EqualTo(_dateTimeUtcNow.ToString()).Within(5).Seconds);
             }
         });
     }
