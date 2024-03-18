@@ -2,7 +2,6 @@ using System.Reflection;
 using Audit.Domain.Abstraction.Model.Audit;
 using Audit.Domain.Abstraction.Tooling;
 using Audit.Domain.Model;
-using Audit.Domain.Tooling;
 using Audit.Infrastructure.Persistence.EntityFramework.Interceptors.SaveChanges;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -45,5 +44,8 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.AddInterceptors(new CreateAuditInterceptor<PumpAuditRecord>(_dateTimeProvider));
+        => optionsBuilder
+            .AddInterceptors(
+                new CreateInitialAuditInterceptor<PumpAuditRecord>(_dateTimeProvider),
+                new CreateUpdateAuditInterceptor<PumpAuditRecord>(_dateTimeProvider));
 }

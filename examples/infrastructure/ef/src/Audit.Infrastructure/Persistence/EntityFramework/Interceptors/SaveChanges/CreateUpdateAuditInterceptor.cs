@@ -1,16 +1,15 @@
 using Audit.Domain.Abstraction.Model.Audit;
 using Audit.Domain.Abstraction.Tooling;
-using Audit.Domain.Tooling;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Interceptors.SaveChanges;
 
-public class CreateAuditInterceptor<T> : ISaveChangesInterceptor where T : IAuditRecord
+public class CreateUpdateAuditInterceptor<T> : ISaveChangesInterceptor where T : IAuditRecord
 {
     private readonly IDateTimeProvider _dateTimeProvider;
 
-    public CreateAuditInterceptor(IDateTimeProvider dateTimeProvider)
+    public CreateUpdateAuditInterceptor(IDateTimeProvider dateTimeProvider)
     {
         _dateTimeProvider = dateTimeProvider;
     }
@@ -24,18 +23,20 @@ public class CreateAuditInterceptor<T> : ISaveChangesInterceptor where T : IAudi
         
         var auditableEntries = eventData.Context.ChangeTracker
             .Entries()
-            .Where(x => x.State is EntityState.Added)
+            .Where(x => x.State is EntityState.Modified)
             .Where(x => x.Entity is IAuditable<T>);
         
         foreach (var auditableEntry in auditableEntries)
         {
-            var auditableEntity = (auditableEntry.Entity as IAuditable<T>)!;
+            var changes = new Dictionary<string, (string? OriginalValue, string? UpdatedValue)>();
 
-            var changes = new Dictionary<string, (string? OriginalValue, string? UpdatedValue)>
+            var modifiedProperties = auditableEntry.Properties.Where(x => x.IsModified);
+            foreach (var modifiedProperty in modifiedProperties)
             {
-                { "CreationDateTimeUtc", (null, _dateTimeProvider.UtcNow.ToString()) }
-            };
-            
+                changes.Add(modifiedProperty.Metadata.Name, (modifiedProperty.OriginalValue?.ToString(), modifiedProperty.CurrentValue?.ToString()));
+            }
+         
+            var auditableEntity = (auditableEntry.Entity as IAuditable<T>)!;
             auditableEntity.AddAuditRecord(changes, _dateTimeProvider);
         }
 
