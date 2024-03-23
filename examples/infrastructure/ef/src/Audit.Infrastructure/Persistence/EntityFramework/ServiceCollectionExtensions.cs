@@ -1,4 +1,3 @@
-using Audit.Core;
 using Audit.Infrastructure.Persistence.EntityFramework.Databases.Postgres;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,12 +11,6 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration)
     {
         serviceCollection.AddPostgresDatabase(configuration);
-
-        Configuration
-            .Setup()
-            .UseEntityFramework(x => x
-                .UseDbContext<DbContext>()
-                .AuditTypeNameMapper(typeName => $"{typeName}Audit"));
         
         return serviceCollection;
     }
