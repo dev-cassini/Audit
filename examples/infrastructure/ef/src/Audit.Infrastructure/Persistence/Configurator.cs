@@ -1,5 +1,3 @@
-using Audit.Infrastructure.Persistence.EntityFramework;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Audit.Infrastructure.Persistence;
@@ -7,17 +5,17 @@ namespace Audit.Infrastructure.Persistence;
 public class Configurator
 {
     private readonly IServiceCollection _serviceCollection;
-    private readonly IConfiguration _configuration;
 
-    public Configurator(IServiceCollection serviceCollection, IConfiguration configuration)
+    public Configurator(IServiceCollection serviceCollection)
     {
         _serviceCollection = serviceCollection;
-        _configuration = configuration;
     }
     
-    public Configurator AddEntityFramework()
+    public Configurator AddEntityFramework(Action<EntityFramework.Configurator> configuratorAction)
     {
-        _serviceCollection.AddEntityFramework(_configuration);
+        var configurator = new EntityFramework.Configurator(_serviceCollection);
+        configuratorAction.Invoke(configurator);
+        
         return this;
     }
 }

@@ -1,5 +1,7 @@
 using Audit.Domain.Abstraction.Tooling;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
 namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework;
@@ -19,8 +21,29 @@ public static class EfSqlLiteDatabaseSetUpFixture
         DateTimeProviderMock.Setup(x => x.UtcNow).Returns(DateTimeOffset.UtcNow);
         var sqliteConnection = new SqliteConnection("DataSource=:memory:");
         sqliteConnection.Open();
+
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection().Build();
+        var serviceProvider = new ServiceCollection()
+            .AddSingleton(DateTimeProvider)
+            .AddSingleton(sqliteConnection)
+            .AddInfrastructure(infrastructureConfigurator =>
+            {
+                infrastructureConfigurator
+                    .AddPersistence(persistenceConfigurator =>
+                    {
+                        persistenceConfigurator.AddEntityFramework(efConfigurator =>
+                        {
+                            efConfigurator.AddDbContext<TestDbContext>(
+                                configuration,
+                                dbConfigurator => dbConfigurator.UseSqlite(sqliteConnection),
+                                interceptorConfigurator => interceptorConfigurator.AddAuditInterceptors(),
+                                ServiceLifetime.Singleton,
+                                ServiceLifetime.Singleton);
+                        });
+                    });
+            }).BuildServiceProvider();
         
-        var dbContext = new TestDbContext(sqliteConnection, DateTimeProvider);
+        var dbContext = serviceProvider.GetRequiredService<TestDbContext>();
         dbContext.Database.EnsureCreated();
         
         SqliteConnection = sqliteConnection;
