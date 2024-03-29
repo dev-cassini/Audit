@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Audit.Application\Audit.Application.csproj" />
       <ProjectReference Include="..\Audit.Domain\Audit.Domain.csproj" />
     </ItemGroup>
 
