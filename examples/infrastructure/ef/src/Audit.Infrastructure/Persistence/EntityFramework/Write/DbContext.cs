@@ -6,7 +6,7 @@ using Audit.Infrastructure.Persistence.EntityFramework.Interceptors.SaveChanges;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Audit.Infrastructure.Persistence.EntityFramework;
+namespace Audit.Infrastructure.Persistence.EntityFramework.Write;
 
 public class DbContext : Microsoft.EntityFrameworkCore.DbContext
 {

@@ -9,7 +9,7 @@ public static class ServiceProviderExtensions
     {
         using var scope = serviceProvider.CreateScope();
 
-        var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<Write.DbContext>();
         dbContext.Database.Migrate();
 
         return serviceProvider;

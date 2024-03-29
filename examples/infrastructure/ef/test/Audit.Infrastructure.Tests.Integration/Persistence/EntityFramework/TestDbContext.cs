@@ -1,11 +1,10 @@
 using Audit.Domain.Abstraction.Tooling;
-using Audit.Domain.Tooling;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework;
 
-using DbContext = Infrastructure.Persistence.EntityFramework.DbContext;
+using DbContext = Infrastructure.Persistence.EntityFramework.Write.DbContext;
 
 public class TestDbContext : DbContext
 {

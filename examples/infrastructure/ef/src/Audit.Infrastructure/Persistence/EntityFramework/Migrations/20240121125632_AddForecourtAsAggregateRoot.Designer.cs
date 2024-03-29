@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Migrations
 {
-    [DbContext(typeof(DbContext))]
+    [DbContext(typeof(Write.DbContext))]
     [Migration("20240121125632_AddForecourtAsAggregateRoot")]
     partial class AddForecourtAsAggregateRoot
     {

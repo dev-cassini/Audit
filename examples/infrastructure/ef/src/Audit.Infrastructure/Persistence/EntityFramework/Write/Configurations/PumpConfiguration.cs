@@ -2,7 +2,7 @@ using Audit.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Audit.Infrastructure.Persistence.EntityFramework.Configurations;
+namespace Audit.Infrastructure.Persistence.EntityFramework.Write.Configurations;
 
 public class PumpConfiguration : IEntityTypeConfiguration<Pump>
 {

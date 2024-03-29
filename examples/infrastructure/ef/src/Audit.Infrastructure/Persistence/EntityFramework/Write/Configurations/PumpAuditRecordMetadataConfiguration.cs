@@ -2,7 +2,7 @@ using Audit.Domain.Abstraction.Model.Audit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Audit.Infrastructure.Persistence.EntityFramework.Configurations;
+namespace Audit.Infrastructure.Persistence.EntityFramework.Write.Configurations;
 
 public class PumpAuditRecordMetadataConfiguration : IEntityTypeConfiguration<AuditRecordMetadata>
 {

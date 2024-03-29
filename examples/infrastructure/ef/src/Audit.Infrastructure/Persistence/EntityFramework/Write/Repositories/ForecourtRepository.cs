@@ -1,6 +1,6 @@
 using Audit.Domain.Model;
 
-namespace Audit.Infrastructure.Persistence.EntityFramework.Repositories;
+namespace Audit.Infrastructure.Persistence.EntityFramework.Write.Repositories;
 
 public class ForecourtRepository
 {

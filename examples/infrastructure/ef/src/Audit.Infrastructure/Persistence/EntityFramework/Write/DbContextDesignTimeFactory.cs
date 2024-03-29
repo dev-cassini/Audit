@@ -2,7 +2,7 @@ using Audit.Domain.Tooling;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Audit.Infrastructure.Persistence.EntityFramework;
+namespace Audit.Infrastructure.Persistence.EntityFramework.Write;
 
 public class DbContextDesignTimeFactory : IDesignTimeDbContextFactory<DbContext>
 {

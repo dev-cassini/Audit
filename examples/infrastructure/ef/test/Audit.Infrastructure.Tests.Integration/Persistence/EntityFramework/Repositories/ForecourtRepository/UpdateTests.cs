@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework.Repositories.ForecourtRepository;
 
-using ForecourtRepository = Infrastructure.Persistence.EntityFramework.Repositories.ForecourtRepository;
+using ForecourtRepository = Infrastructure.Persistence.EntityFramework.Write.Repositories.ForecourtRepository;
 
 [TestFixture]
 public class UpdateTests
