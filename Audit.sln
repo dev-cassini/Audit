@@ -40,6 +40,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Api", "examples\infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Application", "examples\infrastructure\ef\src\Audit.Application\Audit.Application.csproj", "{8625A30C-ABAA-4F30-B75D-A0978236F022}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{EB78F99E-308D-42F5-9FC5-8532BC0D8D4A}"
+	ProjectSection(SolutionItems) = preProject
+		docker\docker-compose.yml = docker\docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
