@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Read;
 
-public class DbContext(DbContextOptions<DbContext> options) : Microsoft.EntityFrameworkCore.DbContext(options)
+public class DbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     private DbSet<Forecourt> Forecourts { get; set; } = null!;
     public IQueryable<Forecourt> ForecourtsView => Forecourts.AsNoTracking();
@@ -24,6 +24,10 @@ public class DbContext(DbContextOptions<DbContext> options) : Microsoft.EntityFr
     
     private DbSet<Vehicle> Vehicles { get; set; } = null!;
     public IQueryable<Vehicle> VehiclesView => Vehicles.AsNoTracking();
+
+    protected DbContext() { }
+    
+    public DbContext(DbContextOptions<DbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

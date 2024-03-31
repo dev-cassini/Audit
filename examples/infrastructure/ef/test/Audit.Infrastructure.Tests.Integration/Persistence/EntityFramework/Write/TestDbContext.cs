@@ -2,7 +2,7 @@ using Audit.Domain.Abstraction.Tooling;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
-namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework;
+namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework.Write;
 
 using DbContext = Infrastructure.Persistence.EntityFramework.Write.DbContext;
 

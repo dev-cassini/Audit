@@ -13,7 +13,7 @@ public static class EfSqlLiteDatabaseSetUpFixture
     private static readonly Mock<IDateTimeProvider> DateTimeProviderMock = new();
 
     public static IDateTimeProvider DateTimeProvider => DateTimeProviderMock.Object;
-    public static TestDbContext DbContext { get; private set; } = null!;
+    public static Write.TestDbContext WriteDbContext { get; private set; } = null!;
     
     [OneTimeSetUp]
     public static void OneTimeSetUp()
@@ -33,7 +33,7 @@ public static class EfSqlLiteDatabaseSetUpFixture
                     {
                         persistenceConfigurator.AddEntityFramework(efConfigurator =>
                         {
-                            efConfigurator.AddDbContext<TestDbContext>(
+                            efConfigurator.AddDbContext<Write.TestDbContext>(
                                 configuration,
                                 dbConfigurator => dbConfigurator.UseSqlite(sqliteConnection),
                                 interceptorConfigurator => interceptorConfigurator.AddAuditInterceptors(typeof(Domain.AssemblyMarker).Assembly),
@@ -43,11 +43,11 @@ public static class EfSqlLiteDatabaseSetUpFixture
                     });
             }).BuildServiceProvider();
         
-        var dbContext = serviceProvider.GetRequiredService<TestDbContext>();
+        var dbContext = serviceProvider.GetRequiredService<Write.TestDbContext>();
         dbContext.Database.EnsureCreated();
         
         SqliteConnection = sqliteConnection;
-        DbContext = dbContext;
+        WriteDbContext = dbContext;
     }
 
     [OneTimeTearDown]

@@ -31,7 +31,7 @@ public class AddTests
         
         pump.Filling(car);
         
-        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.DbContext);
+        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.WriteDbContext);
         await sut.AddAsync(forecourt, CancellationToken.None);
         await sut.SaveChangesAsync(CancellationToken.None);
 
@@ -41,7 +41,7 @@ public class AddTests
     [OneTimeTearDown]
     public async Task TearDown()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
         await dbContext.Forecourts.ExecuteDeleteAsync();
         await dbContext.SaveChangesAsync();
     }
@@ -49,7 +49,7 @@ public class AddTests
     [Test]
     public async Task ForecourtIsAddedToDatabase()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Where(x => x.Id == _forecourt.Id)
@@ -65,7 +65,7 @@ public class AddTests
     [Test]
     public async Task ForecourtLanesAreAddedToDatabase()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Include(x => x.Lanes)
@@ -89,7 +89,7 @@ public class AddTests
     [Test]
     public async Task ForecourtLanePumpsAreAddedToDatabase()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Include(x => x.Lanes)
@@ -115,7 +115,7 @@ public class AddTests
     [Test]
     public async Task PumpVehicleIdIsSet()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Include(x => x.Lanes)
@@ -138,7 +138,7 @@ public class AddTests
     [Test]
     public async Task ForEachPumpAPumpAuditRecordIsAddedToDatabase()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Include(x => x.Lanes)
@@ -166,7 +166,7 @@ public class AddTests
     public async Task PumpAuditRecordTimestampIsSetToDateTimeUtcNow()
     {
         var utcNow = EfSqlLiteDatabaseSetUpFixture.DateTimeProvider.UtcNow;
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Include(x => x.Lanes)
@@ -193,7 +193,7 @@ public class AddTests
     public async Task ForEachPumpAuditRecordACreationAuditMetadataIsAddedToDatabase()
     {
         var utcNow = EfSqlLiteDatabaseSetUpFixture.DateTimeProvider.UtcNow;
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Include(x => x.Lanes)
@@ -226,7 +226,7 @@ public class AddTests
     [Test]
     public async Task PumpAuditRecordTimestampIsEqualToCreationAuditMetadataUpdatedValue()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
 
         var dbForecourt = await dbContext.Forecourts
             .Include(x => x.Lanes)

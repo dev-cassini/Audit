@@ -12,7 +12,7 @@ public class UpdateTests
     [TearDown]
     public async Task TearDown()
     {
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
         await dbContext.Forecourts.ExecuteDeleteAsync();
         await dbContext.SaveChangesAsync();
     }
@@ -36,7 +36,7 @@ public class UpdateTests
             10,
             100);
         
-        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.DbContext);
+        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.WriteDbContext);
         await sut.AddAsync(forecourt, CancellationToken.None);
         await sut.SaveChangesAsync(CancellationToken.None);
 
@@ -45,7 +45,7 @@ public class UpdateTests
         await sut.SaveChangesAsync(CancellationToken.None);
         
         // Assert
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
         var dbPump = await dbContext.Pumps.SingleAsync(x => x.Id == pump.Id);
         
         Assert.That(dbPump.VehicleId, Is.EqualTo(car.Id));
@@ -70,7 +70,7 @@ public class UpdateTests
             10,
             100);
         
-        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.DbContext);
+        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.WriteDbContext);
         await sut.AddAsync(forecourt, CancellationToken.None);
         await sut.SaveChangesAsync(CancellationToken.None);
         EfSqlLiteDatabaseSetUpFixture.ResetDateTimeProvider();
@@ -80,7 +80,7 @@ public class UpdateTests
         await sut.SaveChangesAsync(CancellationToken.None);
         
         // Assert
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
         var dbPumpAuditRecords = await dbContext.PumpAuditRecords.Where(x => x.PumpId == pump.Id).ToListAsync();
         var latestAuditRecord = dbPumpAuditRecords.OrderByDescending(x => x.Timestamp).First();
         
@@ -110,7 +110,7 @@ public class UpdateTests
             10,
             100);
         
-        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.DbContext);
+        var sut = new ForecourtRepository(EfSqlLiteDatabaseSetUpFixture.WriteDbContext);
         await sut.AddAsync(forecourt, CancellationToken.None);
         await sut.SaveChangesAsync(CancellationToken.None);
         EfSqlLiteDatabaseSetUpFixture.ResetDateTimeProvider();
@@ -120,7 +120,7 @@ public class UpdateTests
         await sut.SaveChangesAsync(CancellationToken.None);
         
         // Assert
-        var dbContext = EfSqlLiteDatabaseSetUpFixture.DbContext;
+        var dbContext = EfSqlLiteDatabaseSetUpFixture.WriteDbContext;
         var dbPumpAuditRecords = await dbContext.PumpAuditRecords
             .Include(x => x.Metadata)
             .Where(x => x.PumpId == pump.Id).ToListAsync();
