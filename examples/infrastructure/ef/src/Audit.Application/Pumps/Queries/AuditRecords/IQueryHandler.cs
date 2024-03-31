@@ -1,6 +1,6 @@
-using Audit.Application.Pumps.Queries.GetPumpAuditRecords.Dtos;
+using Audit.Application.Pumps.Queries.AuditRecords.Dtos;
 
-namespace Audit.Application.Pumps.Queries.GetPumpAuditRecords;
+namespace Audit.Application.Pumps.Queries.AuditRecords;
 
 public interface IQueryHandler
 {

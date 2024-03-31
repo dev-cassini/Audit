@@ -1,4 +1,4 @@
-namespace Audit.Application.Pumps.Queries.GetPumpAuditRecords.Dtos;
+namespace Audit.Application.Pumps.Queries.AuditRecords.Dtos;
 
 /// <summary>
 /// Details of the state modifications associated with an audit record.

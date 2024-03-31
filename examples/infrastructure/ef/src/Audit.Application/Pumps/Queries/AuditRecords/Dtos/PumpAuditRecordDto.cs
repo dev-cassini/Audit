@@ -1,4 +1,4 @@
-namespace Audit.Application.Pumps.Queries.GetPumpAuditRecords.Dtos;
+namespace Audit.Application.Pumps.Queries.AuditRecords.Dtos;
 
 /// <summary>
 /// An audit record from a unit of work in which the pump's state was modified.

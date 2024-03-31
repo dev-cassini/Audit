@@ -1,9 +1,9 @@
-using Audit.Application.Pumps.Queries.GetPumpAuditRecords;
-using Audit.Application.Pumps.Queries.GetPumpAuditRecords.Dtos;
+using Audit.Application.Pumps.Queries.AuditRecords;
+using Audit.Application.Pumps.Queries.AuditRecords.Dtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Audit.Infrastructure.Persistence.EntityFramework.Read.Queries.Pumps;
+namespace Audit.Infrastructure.Persistence.EntityFramework.Read.Queries.Pumps.AuditRecords;
 
 public class QueryHandler(DbContext readDbContext) : IQueryHandler, IRequestHandler<Query, IEnumerable<PumpAuditRecordDto>>
 {

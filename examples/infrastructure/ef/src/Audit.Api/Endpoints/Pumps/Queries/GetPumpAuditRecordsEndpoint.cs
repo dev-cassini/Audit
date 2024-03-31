@@ -1,4 +1,3 @@
-using Audit.Application.Pumps.Queries.GetPumpAuditRecords.Dtos;
 using MediatR;
 
 namespace Audit.Api.Endpoints.Pumps.Queries;
@@ -12,7 +11,7 @@ public static class GetPumpAuditRecordsEndpoint
         webApplication.MapPost("/forecourts/{forecourtId}/lanes/{laneId}/pumps/{pumpId}/audit-records", Query)
             .AllowAnonymous()
             .WithTags(nameof(Pumps))
-            .Produces(StatusCodes.Status200OK, typeof(IEnumerable<PumpAuditRecordDto>))
+            .Produces(StatusCodes.Status200OK, typeof(IEnumerable<Queries.AuditRecords.Dtos.PumpAuditRecordDto>))
             .Produces(StatusCodes.Status404NotFound);
 
         return webApplication;
@@ -25,7 +24,7 @@ public static class GetPumpAuditRecordsEndpoint
         Guid pumpId,
         CancellationToken cancellationToken)
     {
-        var query = new Queries.GetPumpAuditRecords.Query(forecourtId, laneId, pumpId);
+        var query = new Queries.AuditRecords.Query(forecourtId, laneId, pumpId);
         var response = (await mediator.Send(query, cancellationToken)).ToList();
 
         if (response.Any() is false)
