@@ -19,4 +19,10 @@ public class Configurator(
         dbContextOptionsBuilder.UseSqlite(sqliteConnection);
         return this;
     }
+
+    public Configurator EnableSensitiveDataLogging()
+    {
+        dbContextOptionsBuilder.EnableSensitiveDataLogging();
+        return this;
+    }
 }

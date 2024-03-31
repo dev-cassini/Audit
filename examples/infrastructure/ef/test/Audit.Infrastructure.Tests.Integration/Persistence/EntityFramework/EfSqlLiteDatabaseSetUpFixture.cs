@@ -6,6 +6,8 @@ using Moq;
 
 namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework;
 
+using EntityFramework = Audit.Infrastructure.Persistence.EntityFramework;
+
 [SetUpFixture]
 public static class EfSqlLiteDatabaseSetUpFixture
 {
@@ -13,7 +15,8 @@ public static class EfSqlLiteDatabaseSetUpFixture
     private static readonly Mock<IDateTimeProvider> DateTimeProviderMock = new();
 
     public static IDateTimeProvider DateTimeProvider => DateTimeProviderMock.Object;
-    public static Write.TestDbContext WriteDbContext { get; private set; } = null!;
+    public static EntityFramework.Read.DbContext ReadDbContext { get; private set; } = null!;
+    public static EntityFramework.Write.DbContext WriteDbContext { get; private set; } = null!;
     
     [OneTimeSetUp]
     public static void OneTimeSetUp()
@@ -33,9 +36,26 @@ public static class EfSqlLiteDatabaseSetUpFixture
                     {
                         persistenceConfigurator.AddEntityFramework(efConfigurator =>
                         {
-                            efConfigurator.AddDbContext<Write.TestDbContext>(
+                            efConfigurator.AddDbContext<EntityFramework.Read.DbContext>(
                                 configuration,
-                                dbConfigurator => dbConfigurator.UseSqlite(sqliteConnection),
+                                dbConfigurator =>
+                                {
+                                    dbConfigurator
+                                        .UseSqlite(sqliteConnection)
+                                        .EnableSensitiveDataLogging();
+                                },
+                                null,
+                                ServiceLifetime.Singleton,
+                                ServiceLifetime.Singleton);
+                            
+                            efConfigurator.AddDbContext<EntityFramework.Write.DbContext>(
+                                configuration,
+                                dbConfigurator =>
+                                {
+                                    dbConfigurator
+                                        .UseSqlite(sqliteConnection)
+                                        .EnableSensitiveDataLogging();
+                                },
                                 interceptorConfigurator => interceptorConfigurator.AddAuditInterceptors(typeof(Domain.AssemblyMarker).Assembly),
                                 ServiceLifetime.Singleton,
                                 ServiceLifetime.Singleton);
@@ -43,10 +63,11 @@ public static class EfSqlLiteDatabaseSetUpFixture
                     });
             }).BuildServiceProvider();
         
-        var dbContext = serviceProvider.GetRequiredService<Write.TestDbContext>();
+        var dbContext = serviceProvider.GetRequiredService<EntityFramework.Write.DbContext>();
         dbContext.Database.EnsureCreated();
         
         SqliteConnection = sqliteConnection;
+        ReadDbContext = serviceProvider.GetRequiredService<EntityFramework.Read.DbContext>();
         WriteDbContext = dbContext;
     }
 

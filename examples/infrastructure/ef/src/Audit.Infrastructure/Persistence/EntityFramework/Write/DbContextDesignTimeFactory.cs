@@ -1,4 +1,3 @@
-using Audit.Domain.Tooling;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -11,6 +10,6 @@ public class DbContextDesignTimeFactory : IDesignTimeDbContextFactory<DbContext>
         var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
         optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=password;Database=Audit.Infrastructure.Ef;Include Error Detail=true");
 
-        return new DbContext(optionsBuilder.Options, new DateTimeProvider());
+        return new DbContext(optionsBuilder.Options);
     }
 }
