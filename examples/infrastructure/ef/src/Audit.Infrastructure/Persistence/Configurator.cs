@@ -2,18 +2,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Audit.Infrastructure.Persistence;
 
-public class Configurator
+public class Configurator(IServiceCollection serviceCollection)
 {
-    private readonly IServiceCollection _serviceCollection;
-
-    public Configurator(IServiceCollection serviceCollection)
-    {
-        _serviceCollection = serviceCollection;
-    }
-    
     public Configurator AddEntityFramework(Action<EntityFramework.Configurator> configuratorAction)
     {
-        var configurator = new EntityFramework.Configurator(_serviceCollection);
+        var configurator = new EntityFramework.Configurator(serviceCollection);
         configuratorAction.Invoke(configurator);
         
         return this;

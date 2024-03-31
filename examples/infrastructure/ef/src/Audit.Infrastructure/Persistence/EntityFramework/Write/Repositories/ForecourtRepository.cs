@@ -2,22 +2,15 @@ using Audit.Domain.Model;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Write.Repositories;
 
-public class ForecourtRepository
+public class ForecourtRepository(DbContext dbContext)
 {
-    private readonly DbContext _dbContext;
-
-    public ForecourtRepository(DbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public async Task AddAsync(Forecourt forecourt, CancellationToken cancellationToken)
     {
-        await _dbContext.Forecourts.AddAsync(forecourt, cancellationToken);
+        await dbContext.Forecourts.AddAsync(forecourt, cancellationToken);
     }
 
     public async Task SaveChangesAsync(CancellationToken cancellationToken)
     {
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

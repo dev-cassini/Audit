@@ -9,24 +9,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Interceptors;
 
-public class Configurator
+public class Configurator(
+    IServiceProvider serviceProvider,
+    DbContextOptionsBuilder dbContextOptionsBuilder)
 {
-    private readonly IServiceProvider _serviceProvider;
-    private readonly DbContextOptionsBuilder _dbContextOptionsBuilder;
-
-    public Configurator(
-        IServiceProvider serviceProvider, 
-        DbContextOptionsBuilder dbContextOptionsBuilder)
-    {
-        _serviceProvider = serviceProvider;
-        _dbContextOptionsBuilder = dbContextOptionsBuilder;
-    }
-
     public Configurator AddAuditInterceptors()
     {
-        var dateTimeProvider = _serviceProvider.GetRequiredService<IDateTimeProvider>();
+        var dateTimeProvider = serviceProvider.GetRequiredService<IDateTimeProvider>();
         
-        _dbContextOptionsBuilder
+        dbContextOptionsBuilder
             .AddInterceptors(
                 new CreateInitialAuditInterceptor<PumpAuditRecord>(dateTimeProvider),
                 new CreateUpdateAuditInterceptor<PumpAuditRecord>(dateTimeProvider));
@@ -52,7 +43,7 @@ public class Configurator
             .Distinct()
             .ToList();
 
-        var dateTimeProvider = _serviceProvider.GetRequiredService<IDateTimeProvider>();
+        var dateTimeProvider = serviceProvider.GetRequiredService<IDateTimeProvider>();
         var auditInterceptors = new List<IInterceptor>();
         foreach (var auditRecordType in auditRecordTypes)
         {
@@ -69,7 +60,7 @@ public class Configurator
             }
         }
 
-        _dbContextOptionsBuilder.AddInterceptors(auditInterceptors);
+        dbContextOptionsBuilder.AddInterceptors(auditInterceptors);
             
         return this;
     }
@@ -78,9 +69,9 @@ public class Configurator
         where TEntity : IAuditable<TAuditRecord> 
         where TAuditRecord : IAuditRecord
     {
-        var dateTimeProvider = _serviceProvider.GetRequiredService<IDateTimeProvider>();
+        var dateTimeProvider = serviceProvider.GetRequiredService<IDateTimeProvider>();
         
-        _dbContextOptionsBuilder
+        dbContextOptionsBuilder
             .AddInterceptors(
                 new CreateInitialAuditInterceptor<TAuditRecord>(dateTimeProvider),
                 new CreateUpdateAuditInterceptor<TAuditRecord>(dateTimeProvider));

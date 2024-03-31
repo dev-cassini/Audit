@@ -2,7 +2,7 @@ namespace Audit.Domain.Model;
 
 public class Forecourt : Abstraction.Model.Forecourt
 {
-    private readonly List<Lane> _lanes = new();
+    private readonly List<Lane> _lanes = [];
     public IEnumerable<Lane> Lanes => _lanes.AsReadOnly();
     
     public Forecourt(Guid id) : base(id) { }

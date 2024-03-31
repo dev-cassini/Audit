@@ -5,15 +5,9 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Interceptors.SaveChanges;
 
-public class CreateUpdateAuditInterceptor<T> : ISaveChangesInterceptor where T : IAuditRecord
+public class CreateUpdateAuditInterceptor<T>(IDateTimeProvider dateTimeProvider) : ISaveChangesInterceptor
+    where T : IAuditRecord
 {
-    private readonly IDateTimeProvider _dateTimeProvider;
-
-    public CreateUpdateAuditInterceptor(IDateTimeProvider dateTimeProvider)
-    {
-        _dateTimeProvider = dateTimeProvider;
-    }
-    
     public ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
@@ -37,7 +31,7 @@ public class CreateUpdateAuditInterceptor<T> : ISaveChangesInterceptor where T :
             }
          
             var auditableEntity = (auditableEntry.Entity as IAuditable<T>)!;
-            auditableEntity.AddAuditRecord(changes, _dateTimeProvider);
+            auditableEntity.AddAuditRecord(changes, dateTimeProvider);
         }
 
         return ValueTask.FromResult(result);

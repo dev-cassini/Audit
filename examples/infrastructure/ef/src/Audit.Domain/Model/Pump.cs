@@ -7,7 +7,7 @@ public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
 {
     public Vehicle? Vehicle { get; private set; }
     
-    private readonly List<PumpAuditRecord> _auditRecords = new();
+    private readonly List<PumpAuditRecord> _auditRecords = [];
     public IEnumerable<PumpAuditRecord> AuditRecords => _auditRecords.Where(x => x.Metadata.Any());
     
     public Pump(Guid id, Lane lane) : base(id, lane.Id, null) { }

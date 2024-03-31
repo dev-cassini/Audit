@@ -3,15 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework;
 
-public class Configurator
+public class Configurator(IServiceCollection serviceCollection)
 {
-    private readonly IServiceCollection _serviceCollection;
-
-    public Configurator(IServiceCollection serviceCollection)
-    {
-        _serviceCollection = serviceCollection;
-    }
-
     public Configurator AddDbContext<T>(
         IConfiguration configuration,
         Action<Databases.Configurator> dbConfiguratorAction,
@@ -20,7 +13,7 @@ public class Configurator
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
         where T : Microsoft.EntityFrameworkCore.DbContext
     {
-        _serviceCollection.AddDbContext<T>((serviceProvider, builder) =>
+        serviceCollection.AddDbContext<T>((serviceProvider, builder) =>
             {
                 var dbConfigurator = new Databases.Configurator(builder, configuration);
                 dbConfiguratorAction.Invoke(dbConfigurator);
