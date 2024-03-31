@@ -2,7 +2,7 @@ using Audit.Domain.Abstraction.Enums;
 using Audit.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework.Repositories.ForecourtRepository;
+namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework.Write.Repositories.ForecourtRepository;
 
 using ForecourtRepository = Infrastructure.Persistence.EntityFramework.Write.Repositories.ForecourtRepository;
 
