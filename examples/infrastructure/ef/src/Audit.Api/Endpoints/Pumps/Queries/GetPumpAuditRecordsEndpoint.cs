@@ -8,7 +8,7 @@ public static class GetPumpAuditRecordsEndpoint
 {
     public static WebApplication RegisterGetPumpAuditRecordsEndpoint(this WebApplication webApplication)
     {
-        webApplication.MapPost("/forecourts/{forecourtId}/lanes/{laneId}/pumps/{pumpId}/audit-records", Query)
+        webApplication.MapGet("/forecourts/{forecourtId}/lanes/{laneId}/pumps/{pumpId}/audit-records", Query)
             .AllowAnonymous()
             .WithTags(nameof(Pumps))
             .Produces(StatusCodes.Status200OK, typeof(IEnumerable<Queries.AuditRecords.Dtos.PumpAuditRecordDto>))
