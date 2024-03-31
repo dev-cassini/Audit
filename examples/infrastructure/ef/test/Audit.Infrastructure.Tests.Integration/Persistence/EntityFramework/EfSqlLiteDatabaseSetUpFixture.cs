@@ -9,7 +9,7 @@ namespace Audit.Infrastructure.Tests.Integration.Persistence.EntityFramework;
 [SetUpFixture]
 public static class EfSqlLiteDatabaseSetUpFixture
 {
-    private static SqliteConnection SqliteConnection { get; set; } = null!;
+    private static SqliteConnection? SqliteConnection { get; set; }
     private static readonly Mock<IDateTimeProvider> DateTimeProviderMock = new();
 
     public static IDateTimeProvider DateTimeProvider => DateTimeProviderMock.Object;
@@ -21,7 +21,7 @@ public static class EfSqlLiteDatabaseSetUpFixture
         DateTimeProviderMock.Setup(x => x.UtcNow).Returns(DateTimeOffset.UtcNow);
         var sqliteConnection = new SqliteConnection("DataSource=:memory:");
         sqliteConnection.Open();
-
+        
         var configuration = new ConfigurationBuilder().AddInMemoryCollection().Build();
         var serviceProvider = new ServiceCollection()
             .AddSingleton(DateTimeProvider)
@@ -36,7 +36,7 @@ public static class EfSqlLiteDatabaseSetUpFixture
                             efConfigurator.AddDbContext<TestDbContext>(
                                 configuration,
                                 dbConfigurator => dbConfigurator.UseSqlite(sqliteConnection),
-                                interceptorConfigurator => interceptorConfigurator.AddAuditInterceptors(),
+                                interceptorConfigurator => interceptorConfigurator.AddAuditInterceptors(typeof(Domain.AssemblyMarker).Assembly),
                                 ServiceLifetime.Singleton,
                                 ServiceLifetime.Singleton);
                         });
@@ -53,7 +53,7 @@ public static class EfSqlLiteDatabaseSetUpFixture
     [OneTimeTearDown]
     public static void OneTimeTearDown()
     {
-        SqliteConnection.Close();
+        SqliteConnection?.Close();
     }
 
     public static void ResetDateTimeProvider()
