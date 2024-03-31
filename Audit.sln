@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{EB78F9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{653D5371-BB81-440C-A1B0-0AFA7223E98F}"
 	ProjectSection(SolutionItems) = preProject
-		settings\Audit.sln.DotSettings = settings\Audit.sln.DotSettings
+		Audit.sln.DotSettings = Audit.sln.DotSettings
 	EndProjectSection
 EndProject
 Global
