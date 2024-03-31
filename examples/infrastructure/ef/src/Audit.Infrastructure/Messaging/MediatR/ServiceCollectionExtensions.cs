@@ -9,7 +9,7 @@ internal static class ServiceCollectionExtensions
         serviceCollection.AddMediatR(configuration =>
         {
             configuration
-                .RegisterServicesFromAssemblyContaining<Marker>();
+                .RegisterServicesFromAssemblyContaining<AssemblyMarker>();
         });
         
         return serviceCollection;
