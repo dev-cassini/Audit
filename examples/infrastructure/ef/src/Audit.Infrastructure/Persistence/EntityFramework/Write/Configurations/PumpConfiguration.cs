@@ -16,7 +16,7 @@ public class PumpConfiguration : IEntityTypeConfiguration<Pump>
 
         builder
             .HasMany(x => x.AuditRecords)
-            .WithOne()
+            .WithOne(x => x.Pump)
             .HasForeignKey(x => x.PumpId);
         
         builder

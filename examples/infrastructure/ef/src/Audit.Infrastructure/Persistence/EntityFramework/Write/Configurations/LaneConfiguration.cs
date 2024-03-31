@@ -14,7 +14,7 @@ public class LaneConfiguration : IEntityTypeConfiguration<Lane>
 
         builder
             .HasMany(x => x.Pumps)
-            .WithOne()
+            .WithOne(x => x.Lane)
             .HasForeignKey(x => x.LaneId);
     }
 }

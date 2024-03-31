@@ -9,6 +9,7 @@ public class PumpAuditRecord : Abstraction.Model.Pump, IAuditRecord
     public DateTimeOffset Timestamp { get; }
     public IReadOnlyCollection<AuditRecordMetadata> Metadata = null!;
     public Guid PumpId { get; }
+    public Pump Pump { get; } = null!;
 
     public PumpAuditRecord(
         Pump pump, 
@@ -17,6 +18,7 @@ public class PumpAuditRecord : Abstraction.Model.Pump, IAuditRecord
     : base(pump.Id, pump.LaneId, pump.VehicleId)
     {
         PumpId = pump.Id;
+        Pump = pump;
         Timestamp = dateTimeProvider.UtcNow;
 
         var metadata = changes.Select(x => new AuditRecordMetadata(

@@ -9,11 +9,17 @@ public class QueryHandler(DbContext readDbContext) : IQueryHandler, IRequestHand
 {
     public async Task<IEnumerable<PumpAuditRecordDto>> Handle(Query query, CancellationToken cancellationToken)
     {
-        return await readDbContext.ForecourtsView
-            .Where(x => x.Id == query.ForecourtId)
-            .Where(x => x.Lanes.Any(y => y.Id == query.LaneId))
-            .Where(x => x.Lanes.SelectMany(y => y.Pumps).Any(y => y.Id == query.PumpId))
-            .Select(x => new PumpAuditRecordDto())
+        return await readDbContext.PumpAuditRecordsView
+            .Where(x => x.Pump.Lane.ForecourtId == query.ForecourtId)
+            .Where(x => x.Pump.LaneId == query.LaneId)
+            .Where(x => x.PumpId == query.PumpId)
+            .Select(x => new PumpAuditRecordDto(
+                x.Id,
+                x.Timestamp,
+                x.Metadata.Select(y => new PumpAuditRecordMetadataDto(
+                    y.PropertyName,
+                    y.OriginalValue,
+                    y.UpdatedValue))))
             .ToListAsync(cancellationToken);
     }
 }

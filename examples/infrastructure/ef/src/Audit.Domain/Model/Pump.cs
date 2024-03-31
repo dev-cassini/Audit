@@ -5,12 +5,16 @@ namespace Audit.Domain.Model;
 
 public class Pump : Abstraction.Model.Pump, IAuditable<PumpAuditRecord>
 {
+    public Lane Lane { get; } = null!;
     public Vehicle? Vehicle { get; private set; }
     
     private readonly List<PumpAuditRecord> _auditRecords = [];
     public IEnumerable<PumpAuditRecord> AuditRecords => _auditRecords.Where(x => x.Metadata.Any());
-    
-    public Pump(Guid id, Lane lane) : base(id, lane.Id, null) { }
+
+    public Pump(Guid id, Lane lane) : base(id, lane.Id, null)
+    {
+        Lane = lane;
+    }
     
     public void AddAuditRecord(
         Dictionary<string, (string? OriginalValue, string? UpdatedValue)> changes,
