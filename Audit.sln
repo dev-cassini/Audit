@@ -58,6 +58,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FBB34883-B52
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Domain", "examples\messaging\unit-of-work\src\Audit.Domain\Audit.Domain.csproj", "{9B228944-22AD-4B32-A0AE-6E83709738EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Application", "examples\messaging\unit-of-work\src\Audit.Application\Audit.Application.csproj", "{095056D7-02D7-4F15-9D97-EBAF9585731D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +114,10 @@ Global
 		{9B228944-22AD-4B32-A0AE-6E83709738EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B228944-22AD-4B32-A0AE-6E83709738EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B228944-22AD-4B32-A0AE-6E83709738EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{095056D7-02D7-4F15-9D97-EBAF9585731D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{095056D7-02D7-4F15-9D97-EBAF9585731D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{095056D7-02D7-4F15-9D97-EBAF9585731D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{095056D7-02D7-4F15-9D97-EBAF9585731D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A6F6F9E-7FFF-49E2-9293-1A617DC23637} = {FBE25B3A-84A8-4D90-8CD0-3062D4566B46}
@@ -137,5 +143,6 @@ Global
 		{93740793-20E1-416D-8D52-87EE2BC4DC06} = {6787796A-9B2F-40E9-A360-A8CAC51C1B9A}
 		{FBB34883-B52E-4AC7-971F-8BFEAC34A319} = {93740793-20E1-416D-8D52-87EE2BC4DC06}
 		{9B228944-22AD-4B32-A0AE-6E83709738EC} = {FBB34883-B52E-4AC7-971F-8BFEAC34A319}
+		{095056D7-02D7-4F15-9D97-EBAF9585731D} = {FBB34883-B52E-4AC7-971F-8BFEAC34A319}
 	EndGlobalSection
 EndGlobal
