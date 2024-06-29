@@ -7,8 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Falc.CleanArchitecture.Infrastructure" Version="0.2.0" />
+      <PackageReference Include="MediatR" Version="12.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\Audit.Domain\Audit.Domain.csproj" />
-      <ProjectReference Include="..\Audit.Infrastructure\Audit.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
