@@ -1,6 +1,9 @@
+using Audit.Domain.Common;
+using Audit.Domain.Events;
+
 namespace Audit.Domain.Model;
 
-public class Forecourt
+public class Forecourt : AggregateRoot
 {
     public Guid Id { get; }
     
@@ -10,6 +13,9 @@ public class Forecourt
     public Forecourt(Guid id)
     {
         Id = id;
+
+        var @event = new ForecourtCreated(id);
+        AddDomainEvent(@event);
     }
     
     public Lane AddLane()
