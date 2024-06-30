@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Audit.Infrastructure.Messaging.MediatR;
 
-internal static class ServiceCollectionExtensions
+public static class ServiceCollectionExtensions
 {
-    internal static IServiceCollection AddMediatR(
+    public static IServiceCollection AddMediatR(
         this IServiceCollection serviceCollection,
         Assembly applicationAssembly)
     {

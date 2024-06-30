@@ -8,6 +8,7 @@ namespace Audit.Infrastructure.Persistence.EntityFramework;
 public class FuellerDbContext : DbContext
 {
     public DbSet<Forecourt> Forecourts { get; set; } = null!;
+    public DbSet<Lane> Lanes { get; set; } = null!;
     
     public FuellerDbContext(DbContextOptions<FuellerDbContext> options) : base(options) { }
 
