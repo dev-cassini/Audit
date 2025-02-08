@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework.Interceptors.SaveChanges;
 
-public class CreateInitialAuditInterceptor() : ISaveChangesInterceptor
+public class CreateInitialAuditInterceptor : ISaveChangesInterceptor
 {
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
@@ -19,7 +19,8 @@ public class CreateInitialAuditInterceptor() : ISaveChangesInterceptor
             .Entries()
             .Where(x => x.State is EntityState.Added)
             .Where(x => x.Entity is IAuditable);
-        
+
+        var auditRecords = new List<AuditRecord>();
         foreach (var auditableEntry in auditableEntries)
         {
             var excludedMetadataProperties = new List<string>
@@ -42,9 +43,10 @@ public class CreateInitialAuditInterceptor() : ISaveChangesInterceptor
                 new Actor(Guid.NewGuid(), ""),
                 properties);
 
-            await eventData.Context.AddAsync(auditRecord, cancellationToken);
+            auditRecords.Add(auditRecord);
         }
 
+        await eventData.Context.AddRangeAsync(auditRecords, cancellationToken);
         return await ValueTask.FromResult(result);
     }
 }

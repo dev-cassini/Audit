@@ -11,7 +11,7 @@ public static class CreateLane
     public static WebApplication RegisterCreateLaneEndpoint(this WebApplication webApplication)
     {
         webApplication
-            .MapPost("forecourts/{forecourtId:guid}", Handler)
+            .MapPost("forecourts/{forecourtId:guid}/lanes", Handler)
             .AllowAnonymous()
             .WithTags(nameof(Forecourts))
             .Produces(StatusCodes.Status200OK, typeof(Response))

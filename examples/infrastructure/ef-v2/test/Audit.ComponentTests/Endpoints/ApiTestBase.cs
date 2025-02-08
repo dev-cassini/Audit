@@ -2,7 +2,7 @@ namespace Audit.ComponentTests.Endpoints;
 
 public class ApiTestBase
 {
-    private HttpClient _httpClient;
+    protected HttpClient _httpClient;
 
     [OneTimeSetUp]
     public void OneTimeSetUp()

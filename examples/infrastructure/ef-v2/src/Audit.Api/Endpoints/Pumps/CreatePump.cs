@@ -12,7 +12,7 @@ public static class CreatePump
     public static WebApplication RegisterCreatePumpEndpoint(this WebApplication webApplication)
     {
         webApplication
-            .MapPost("forecourts/{forecourtId:guid}/lanes/{laneId:guid}", Handler)
+            .MapPost("forecourts/{forecourtId:guid}/lanes/{laneId:guid}/pumps", Handler)
             .AllowAnonymous()
             .WithTags(nameof(Forecourts))
             .Produces(StatusCodes.Status200OK, typeof(Response))
