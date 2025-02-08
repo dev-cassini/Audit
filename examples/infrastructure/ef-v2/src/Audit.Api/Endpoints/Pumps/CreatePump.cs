@@ -14,10 +14,11 @@ public static class CreatePump
         webApplication
             .MapPost("forecourts/{forecourtId:guid}/lanes/{laneId:guid}/pumps", Handler)
             .AllowAnonymous()
-            .WithTags(nameof(Forecourts))
+            .WithTags(nameof(Pumps))
             .Produces(StatusCodes.Status200OK, typeof(Response))
             .Produces(StatusCodes.Status401Unauthorized)
-            .Produces(StatusCodes.Status403Forbidden);
+            .Produces(StatusCodes.Status403Forbidden)
+            .ProducesValidationProblem();
             
         return webApplication;
     }

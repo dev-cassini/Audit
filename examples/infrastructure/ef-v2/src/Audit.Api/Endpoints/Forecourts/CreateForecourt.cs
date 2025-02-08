@@ -25,7 +25,6 @@ public static class CreateForecourt
     private static async Task<IResult> Handler(
         [FromBody] Request request,
         AuditDbContext auditDbContext,
-        HttpContext httpContext,
         CancellationToken cancellationToken)
     {
         var forecourt = new Forecourt(Guid.NewGuid(), request.Name);

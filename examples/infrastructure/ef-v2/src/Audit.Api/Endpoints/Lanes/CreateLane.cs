@@ -13,10 +13,11 @@ public static class CreateLane
         webApplication
             .MapPost("forecourts/{forecourtId:guid}/lanes", Handler)
             .AllowAnonymous()
-            .WithTags(nameof(Forecourts))
+            .WithTags(nameof(Lanes))
             .Produces(StatusCodes.Status200OK, typeof(Response))
             .Produces(StatusCodes.Status401Unauthorized)
-            .Produces(StatusCodes.Status403Forbidden);
+            .Produces(StatusCodes.Status403Forbidden)
+            .ProducesValidationProblem();
             
         return webApplication;
     }
@@ -24,7 +25,6 @@ public static class CreateLane
     private static async Task<IResult> Handler(
         [FromRoute] Guid forecourtId,
         AuditDbContext auditDbContext,
-        HttpContext httpContext,
         CancellationToken cancellationToken)
     {
         var forecourt = await auditDbContext.Forecourts

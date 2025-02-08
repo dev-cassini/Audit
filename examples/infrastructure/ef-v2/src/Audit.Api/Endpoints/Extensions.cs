@@ -1,3 +1,4 @@
+using Audit.Api.Endpoints.AuditRecords;
 using Audit.Api.Endpoints.Forecourts;
 using Audit.Api.Endpoints.Lanes;
 using Audit.Api.Endpoints.Pumps;
@@ -13,7 +14,9 @@ public static class Extensions
         webApplication
             .RegisterCreateForecourtEndpoint()
             .RegisterCreateLaneEndpoint()
-            .RegisterCreatePumpEndpoint();
+            .RegisterGetPumpEndpoint()
+            .RegisterCreatePumpEndpoint()
+            .RegisterGetAuditRecordsEndpoint();
 
         return webApplication;
     }

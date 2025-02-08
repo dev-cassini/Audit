@@ -33,7 +33,7 @@ public class CreateInitialAuditInterceptor : ISaveChangesInterceptor
                 .Where(x => excludedMetadataProperties.Contains(x.Metadata.Name) is false)
                 .ToDictionary(
                     property => property.Metadata.Name,
-                    property => (property.OriginalValue?.ToString(), property.CurrentValue?.ToString()));
+                    property => ((string?)null, property.CurrentValue?.ToString()));
 
             var auditableEntity = (auditableEntry.Entity as IAuditable)!;
             var auditRecord = new AuditRecord(
