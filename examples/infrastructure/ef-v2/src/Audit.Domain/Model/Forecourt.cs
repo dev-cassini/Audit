@@ -3,13 +3,15 @@ namespace Audit.Domain.Model;
 public class Forecourt
 {
     public Guid Id { get; }
+    public string Name { get; }
     
     private readonly List<Lane> _lanes = [];
     public IEnumerable<Lane> Lanes => _lanes.AsReadOnly();
 
-    public Forecourt(Guid id)
+    public Forecourt(Guid id, string name)
     {
         Id = id;
+        Name = name;
     }
     
     public Lane AddLane()

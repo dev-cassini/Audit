@@ -10,6 +10,7 @@ public class Pump : IAuditable
     public const decimal FuelDispenseRate = 1.5m;
     
     public Guid Id { get; }
+    public int Number { get; }
     public DateTimeOffset CreationTimestampUtc { get; }
     
     public Guid? VehicleId { get; private set; }
@@ -23,6 +24,7 @@ public class Pump : IAuditable
         Id = id;
         LaneId = lane.Id;
         Lane = lane;
+        Number = lane.Pumps.Count() + 1;
         CreationTimestampUtc = dateTimeProvider.UtcNow;
     }
     

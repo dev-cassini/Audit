@@ -5,7 +5,7 @@ namespace Audit.Domain.Model;
 public class Lane
 {
     public Guid Id { get; }
-    
+    public int Number { get; }
     public Guid ForecourtId { get; }
     
     private readonly List<Pump> _pumps = [];
@@ -14,6 +14,7 @@ public class Lane
     public Lane(Guid id, Forecourt forecourt)
     {
         Id = id;
+        Number = forecourt.Lanes.Count() + 1;
         ForecourtId = forecourt.Id;
     }
     
