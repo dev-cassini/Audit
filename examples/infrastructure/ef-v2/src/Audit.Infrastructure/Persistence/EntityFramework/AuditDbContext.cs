@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Audit.Infrastructure.Persistence.EntityFramework;
 
-public class AuditDbContext : Microsoft.EntityFrameworkCore.DbContext
+public class AuditDbContext : DbContext
 {
     public DbSet<Forecourt> Forecourts { get; set; } = null!;
     public DbSet<Lane> Lanes { get; set; } = null!;
@@ -20,7 +20,7 @@ public class AuditDbContext : Microsoft.EntityFrameworkCore.DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AuditDbContext).Assembly);
         
         foreach (var entity in modelBuilder.Model.GetEntityTypes())
         {

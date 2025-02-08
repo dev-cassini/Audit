@@ -11,6 +11,7 @@ public class PumpConfiguration : IEntityTypeConfiguration<Pump>
         builder.ToTable(nameof(AuditDbContext.Pumps));
         
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.Number);
         builder.Property(x => x.VehicleId);
         builder.Property(x => x.LaneId);
         

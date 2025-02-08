@@ -11,6 +11,7 @@ public class ForecourtConfiguration : IEntityTypeConfiguration<Forecourt>
         builder.ToTable(nameof(AuditDbContext.Forecourts));
 
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.Name);
 
         builder
             .HasMany(x => x.Lanes)

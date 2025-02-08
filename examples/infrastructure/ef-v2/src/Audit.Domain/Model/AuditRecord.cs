@@ -30,4 +30,11 @@ public class AuditRecord
             x.Value.OriginalValue,
             x.Value.UpdatedValue)).ToList();
     }
+    
+    #region EF Constructor
+    // ReSharper disable once UnusedMember.Local
+#pragma warning disable CS8618, CS9264
+    private AuditRecord() { }
+#pragma warning restore CS8618, CS9264
+    #endregion
 }

@@ -28,7 +28,6 @@ app.RegisterEndpoints();
 app
     .UseAuthentication()
     .UseRouting()
-    .UseCors()
     .UseAuthorization();
 
 app.Services
@@ -37,3 +36,5 @@ app.Services
 app.UseHttpsRedirection();
 
 app.Run();
+
+public partial class Program;

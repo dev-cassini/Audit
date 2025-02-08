@@ -11,6 +11,7 @@ public class LaneConfiguration : IEntityTypeConfiguration<Lane>
         builder.ToTable(nameof(AuditDbContext.Lanes));
 
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.Number);
 
         builder
             .HasMany(x => x.Pumps)
